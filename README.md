@@ -5,7 +5,7 @@
 
 Set up git SSH key https://help.github.com/articles/generating-ssh-keys/
 
-Clone all repos robot firmware repos into a single folder:
+Clone all robot firmware repos into a single folder:
 ```
 git clone git@github.com:PetRover/rCore.git
 git clone git@github.com:PetRover/rProtocols.git
