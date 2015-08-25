@@ -1,0 +1,15 @@
+[submodule "rPowerSystems"]
+	path = rPowerSystems
+	url = https://github.com/PetRover/rPowerSystems.git
+[submodule "rMotors"]
+	path = rMotors
+	url = https://github.com/PetRover/rMotors.git
+[submodule "rSensors"]
+	path = rSensors
+	url = https://github.com/PetRover/rSensors.git
+[submodule "rWifi"]
+	path = rWifi
+	url = https://github.com/PetRover/rWifi.git
+[submodule "rProtocols"]
+	path = rProtocols
+	url = https://github.com/PetRover/rProtocols.git
