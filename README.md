@@ -20,5 +20,6 @@ git clone git@github.com:PetRover/rPowerSystems.git
 ####Mac
 * http://beagleboard.org/static/Drivers/MacOSX/RNDIS/HoRNDIS.pkg
 * http://beagleboard.org/static/Drivers/MacOSX/FTDI/FTDI_Ser.dmg
+
 ####Windows
 * http://beagleboard.org/static/Drivers/Windows/BONE_D64.exe
