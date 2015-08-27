@@ -25,6 +25,8 @@ git clone git@github.com:PetRover/rPowerSystems.git
 3. Install [CLion](http://download.jetbrains.com/cpp/clion-1.1.exe)
 * Point the "Enviroment" for CLion to the cygwin folder 
 
+#### Mac
+1. Install [CLion](http://download.jetbrains.com/cpp/CLion-1.1.dmg)
 
 ### Intall CMake
 
