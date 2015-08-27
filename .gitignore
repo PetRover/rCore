@@ -29,3 +29,7 @@
 
 #IDEA files
 .idea/
+
+# build and bin folders
+bin/
+build/
