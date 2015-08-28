@@ -24,6 +24,7 @@ git clone git@github.com:PetRover/rPowerSystems.git
 2. Add the Cygwin folder to the PATH: My Computer->(Right Click)->Properties->Advanced->Environment Variables->System Variables(Path)->Add C:\cygwin64\bin
 3. Install [CLion](http://download.jetbrains.com/cpp/clion-1.1.exe)
 * Point the "Enviroment" for CLion to the cygwin folder 
+* Point the "Git Execuatable" for CLion to the cygwin git ({cygwinfolder}\bin\git.exe) 
 
 #### Mac
 1. Install [CLion](http://download.jetbrains.com/cpp/CLion-1.1.dmg)
