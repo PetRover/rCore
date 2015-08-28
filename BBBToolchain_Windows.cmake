@@ -4,8 +4,9 @@ SET(CMAKE_SYSTEM_NAME Linux)
 SET(CMAKE_SYSTEM_VERSION 1)
 
 # specify the cross compiler
-SET(CMAKE_C_COMPILER /cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe)
-SET(CMAKE_CXX_COMPILER /cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe)
+include(CMakeForceCompiler)
+CMAKE_FORCE_C_COMPILER(/cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe GNU)
+CMAKE_FORCE_CXX_COMPILER(/cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe GNU)
 
 SET(CMAKE_C_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
 SET(CMAKE_CXX_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
