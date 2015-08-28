@@ -5,11 +5,11 @@ SET(CMAKE_SYSTEM_VERSION 1)
 
 # specify the cross compiler
 include(CMakeForceCompiler)
-CMAKE_FORCE_C_COMPILER(/cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe GNU)
-CMAKE_FORCE_CXX_COMPILER(/cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe GNU)
+CMAKE_FORCE_C_COMPILER(arm-linux-gnueabihf-gcc GNU)
+CMAKE_FORCE_CXX_COMPILER(arm-linux-gnueabihf-gcc GNU)
 
-SET(CMAKE_C_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
-SET(CMAKE_CXX_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
+SET(CMAKE_C_FLAGS "-marm -march=armv4t -mfloat-abi=soft -O0 -g -I." CACHE STRING "Toolchain")
+SET(CMAKE_CXX_FLAGS "-marm -march=armv4t -mfloat-abi=soft -O0 -g -I." CACHE STRING "Toolchain")
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
