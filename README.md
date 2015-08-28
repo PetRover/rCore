@@ -45,11 +45,11 @@ export PATH
 
 ### Install BBB Drivers
 #### Mac
-* http://beagleboard.org/static/Drivers/MacOSX/RNDIS/HoRNDIS.pkg
-* http://beagleboard.org/static/Drivers/MacOSX/FTDI/FTDI_Ser.dmg
+* [Network](http://beagleboard.org/static/Drivers/MacOSX/RNDIS/HoRNDIS.pkg)
+* [Serial](http://beagleboard.org/static/Drivers/MacOSX/FTDI/FTDI_Ser.dmg)
 
 #### Windows
-* http://beagleboard.org/static/Drivers/Windows/BONE_D64.exe
+* [All](http://beagleboard.org/static/Drivers/Windows/BONE_D64.exe)
 
 ### Install Cross Compiler Toolchains 
 
