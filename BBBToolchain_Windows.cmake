@@ -4,11 +4,11 @@ SET(CMAKE_SYSTEM_NAME Linux)
 SET(CMAKE_SYSTEM_VERSION 1)
 
 # specify the cross compiler
-SET(CMAKE_C_COMPILER /usr/local/carlson-minot/crosscompilers/bin/arm-none-linux-gnueabi-gcc)
-SET(CMAKE_CXX_COMPILER /usr/local/carlson-minot/crosscompilers/bin/arm-none-linux-gnueabi-gcc)
+SET(CMAKE_C_COMPILER /cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe)
+SET(CMAKE_CXX_COMPILER /cygdrive/c/gcc-linaro/bin/arm-linux-gnueabihf-gcc.exe)
 
-# where is the target environment
-SET(CMAKE_FIND_ROOT_PATH  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot)
+SET(CMAKE_C_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
+SET(CMAKE_CXX_FLAGS "-marm -mfloat-abi=soft -O0 -g -I.")
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
