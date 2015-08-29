@@ -54,7 +54,7 @@ export PATH
 ### Install Cross Compiler Toolchains 
 
 #### Mac
-Referanced from [here](http://tblog.rool.at/?p=57)
+Referanced from [here](http://tblog.rool.at/?p=57) *[do not follow the instructions in this link, they are for referance only]*
 
 1. Download and install the arm cross-compiler toolchain from [this site](http://www.carlson-minot.com/downloads/arm-2014.05-29-arm-none-linux-gnueabi.osx.intelx86.bin.pkg)
 2. Add the new toolchain binaries to the PATH by adding the following lines to ~/.bashrc or ~/.bash_profile:
@@ -65,7 +65,7 @@ export PATH
 3. Configure IDE to run "MasterBuilder_Mac.sh"
 
 #### Windows 
-Referenced from [here](http://jkuhlm.bplaced.net/hellobone/)
+Referenced from [here](http://jkuhlm.bplaced.net/hellobone/) *[do not follow the instructions in this link, they are for referance only]*
 
 1. Download the [linaro cross-compiler toolchain](http://releases.linaro.org/13.09/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.8-2013.09_win32.zip)
 2. Extract to hard drive at {LINARO_LOCATION}
