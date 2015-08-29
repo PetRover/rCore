@@ -20,7 +20,7 @@ git clone git@github.com:PetRover/rPowerSystems.git
 ### Install IDE and Environment 
 
 #### Windows
-1. Install [Cygwin](https://cygwin.com/setup-x86_64.exe) with the default options except for adding git from the devel group
+1. Install [Cygwin](https://cygwin.com/setup-x86_64.exe) with the default options except for adding **git** and **make** from the devel group 
 2. Add the Cygwin folder to the PATH: My Computer->(Right Click)->Properties(option)->Advanced System Settings(link)->Advanced(tab)->Environment Variables(button)->System Variables(table)->Path(entry)->Add C:\cygwin64\bin
 3. Install [CLion](http://download.jetbrains.com/cpp/clion-1.1.exe)
 * Point the "Environment" for CLion to the cygwin folder 
@@ -72,3 +72,9 @@ Referenced from [here](http://jkuhlm.bplaced.net/hellobone/)
 3. Add {LINARO_LOCATION}\bin to the system PATH: : My Computer->(Right Click)->Properties(option)->Advanced System Settings(link)->Advanced(tab)->Environment Variables(button)->System Variables(table)->Path(entry)->Add {LINARO_LOCATION}\bin
 4. Configure IDE to run "MasterBuilder_Windows.bat"
 
+## Advanced Features
+### SSH Auth with Key
+ NOTE: For mac, ssh-copy-id must be installed using ```brew install ssh-copy-id```
+```shell
+ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
+```
