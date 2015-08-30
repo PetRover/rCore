@@ -79,6 +79,13 @@ Referenced from [here](http://jkuhlm.bplaced.net/hellobone/) *[do not follow the
 ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
 ```
 
+### Internet Connection Sharing
+
+#### Windows
+1. Follow the instructions in [this video](https://www.youtube.com/watch?v=D-NEPiZDSx8)
+2. Issue the following command on the beagle bone: ```echo "nameserver 8.8.8.8" >> /etc/resolv.conf``` from [here](http://robotic-controls.com/learn/beaglebone/beaglebone-internet-over-usb-only)
+
+
 ##Configuring Pins
 ###Configure which overlays are enabled/disabled on system startup
 1. Go to My Computer > BeagleBone Getting Started > and open uEnv.txt. Replace the contents of uEnv.txt with: optargs=quiet capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN capemgr.enable_partno=BB-SPIDEV1,BB-I2C1,BB-UART2
