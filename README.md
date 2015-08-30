@@ -78,3 +78,29 @@ Referenced from [here](http://jkuhlm.bplaced.net/hellobone/) *[do not follow the
 ```shell
 ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
 ```
+
+##Configuring Pins
+###Configure which overlays are enabled/disabled on system startup
+1. Go to My Computer > BeagleBone Getting Started > and open uEnv.txt. Replace the contents of uEnv.txt with: optargs=quiet capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN capemgr.enable_partno=BB-SPIDEV1,BB-I2C1,BB-UART2
+2. Save the changes, reboot beaglebone black (/sbin/reboot)
+3. Reconnect to BBB
+
+###Verify setup
+####Check active I2C buses
+shows enabled I2C buses:
+ls -al /dev/i2c*
+
+####Check active SPI buses
+shows enabled SPI buses:
+ls -al /dev/spi*
+
+####Check active UART
+shows enabled UART:
+ls -l /dev/ttyO*
+
+####Check which capes are active
+cat /sys/devices/bone_capemgr.8/slots
+The absence of the letter "L" means that cape is disabled (L means loaded)
+
+####Check pingroups
+cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pingroups
