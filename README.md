@@ -119,7 +119,30 @@ cat /sys/devices/bone_capemgr.8/slots
 ```
 The absence of the letter "L" means that cape is disabled (L means loaded)
 
-####Check pingroups
+####Check pin settings
+#####Pingroups
 ```shell
 cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pingroups
 ```
+
+#####Function assigned to each pin
+To see which pins are unallocated/the function of allocated pins
+```shell
+cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pinmux-pins
+```
+
+#####All settings of each pin
+```shell
+cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pins
+```
+
+The last number in the line (hex) shows the setting for the pin according to the table below
+| Bit        | Description                           |
+| ---------- | ------------------------------------- |
+| 6          | Slew rate. fast=0, slow=1             |
+| 5          | receiver disable=0, enable=1          |
+| 4          | pulldown=0, pullup=1                  |
+| 3          | pullup/pulldown enabled=0, disabled=1 |
+| 2-0        | Mode - between 0 and 7 (see SRM)      |
+
+A [cheat sheet](http://www.valvers.com/wp-content/uploads/2013/10/bbb_gpio_cheat.pdf) to identify pins by the pin number listed with these commands
