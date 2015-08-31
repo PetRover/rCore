@@ -3,11 +3,10 @@
 //
 
 #include <stdio.h>
-#include "rMotors.h"
 
 int main( void )
 {
     printf("\n=====================\nHello world!! This\nis a cMade program!\n======================\n\n");
-    testMotors();
+//    testMotors();
     return 0;
 }
