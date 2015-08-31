@@ -90,7 +90,7 @@ ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
 ###Configure which overlays are enabled/disabled on system startup
 1. Go to My Computer > BeagleBone Getting Started > and open uEnv.txt. Replace the contents of uEnv.txt with: 
 ```
-optargs=quiet capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN capemgr.enable_partno=BB-SPIDEV1,BB-I2C1,BB-UART2
+optargs=quiet capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN capemgr.enable_partno=BB-SPIDEV1,BB-I2C1,BB-UART2,am33xx_pwm,bone_pwm_P8_13,bone_pwm_P8_19,bone_pwm_P9_14,bone_pwm_P9_16
 ```
 2. Save the changes, reboot beaglebone black (/sbin/reboot)
 3. Reconnect to BBB
