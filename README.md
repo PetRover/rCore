@@ -87,13 +87,33 @@ ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
 
 
 ##Configuring Pins
-###Configure which overlays are enabled/disabled on system startup
+###Configure communication buses
+This step will configure which overlays are enabled/disabled on system startup
 1. Go to My Computer > BeagleBone Getting Started > and open uEnv.txt. Replace the contents of uEnv.txt with: 
 ```
 optargs=quiet capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMIN capemgr.enable_partno=BB-SPIDEV1,BB-I2C1,BB-UART2,am33xx_pwm,bone_pwm_P8_13,bone_pwm_P8_19,bone_pwm_P9_14,bone_pwm_P9_16
 ```
 2. Save the changes, reboot beaglebone black (/sbin/reboot)
 3. Reconnect to BBB
+
+###Configure GPIO pins
+1. Copy the startup script into the rover directory on the BBB (this script will configure GPIOS)
+```shell
+cd {rCore directory}
+scp startup.sh root@192.168.7.2:/home/root/rover
+```
+
+2. Copy the contents of the overlays directory into /lib/firmware on BBB. Each file has the configuration for a single GPIO pin.
+```shell
+cd {rCore/overlays}
+scp bspm_* root@192.168.7.2:/lib/firmware
+```
+
+3. Run the startup script
+```shell
+./startup.sh
+```
+Note: This step must be done each time the system powers on.
 
 ###Verify setup
 ####Check active I2C buses
@@ -137,12 +157,12 @@ cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pins
 ```
 
 The last number in the line (hex) shows the setting for the pin according to the table below
-| Bit        | Description                           |
-| ---------- | ------------------------------------- |
-| 6          | Slew rate. fast=0, slow=1             |
-| 5          | receiver disable=0, enable=1          |
-| 4          | pulldown=0, pullup=1                  |
-| 3          | pullup/pulldown enabled=0, disabled=1 |
-| 2-0        | Mode - between 0 and 7 (see SRM)      |
+| Bit | Description                           |
+|-----|---------------------------------------|
+| 6   | Slew rate. fast=0, slow=1             |
+| 5   | Receiver disable=0, enable=1          |
+| 4   | pulldown=0, pullup=1                  |
+| 3   | Pullup/pulldown enabled=0, disabled=1 |
+| 2-0 | Mode - between 0 and 7 (see SRM)      |
 
 A [cheat sheet](http://www.valvers.com/wp-content/uploads/2013/10/bbb_gpio_cheat.pdf) to identify pins by the pin number listed with these commands
