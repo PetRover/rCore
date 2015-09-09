@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.3)
 project(rCore)
 
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
-set(CMAKE_CXX_FLAGS "-std=c++11")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -lstdc++")
 
 # Compiler-specific C++11 activation.
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
@@ -31,6 +31,9 @@ include_directories("./../rWifi")
 
 add_subdirectory("./../rPowerSystems" "rPowerSystems")
 include_directories("./../rPowerSystems")
+
+add_subdirectory("./../rTests" "rTests")
+include_directories("./../rTests")
 
 add_executable(rCore core.cpp)
 
