@@ -53,11 +53,12 @@ export PATH
 * [All](http://beagleboard.org/static/Drivers/Windows/BONE_D64.exe)
 
 ### Install Cross Compiler Toolchains 
+**NOTE**: It is very important that the gcc version running on the host computer is either the same as or older than the gcc version on the beagle bone. To check the gcc version on the beagle bone, run ```/usr/bin/gcc --version```. To check the gcc version on the host computer, run ```arm-none-linux-gnueabi-gcc --version```
 
 #### Mac
 Referanced from [here](http://tblog.rool.at/?p=57) *[do not follow the instructions in this link, they are for referance only]*
 
-1. Download and install the arm cross-compiler toolchain from [this site](http://www.carlson-minot.com/downloads/arm-2014.05-29-arm-none-linux-gnueabi.osx.intelx86.bin.pkg)
+1. Download and install the arm cross-compiler toolchain from [this site](http://www.carlson-minot.com/available-arm-gnu-linux-g-lite-builds-for-mac-os-x/mac-os-x-arm-gnu-linux-g-lite-201311-33-toolchain)
 2. Add the new toolchain binaries to the PATH by adding the following lines to ~/.bashrc or ~/.bash_profile:
 ```shell
 PATH="/usr/local/carlson-minot/crosscompilers/bin:${PATH}"
@@ -158,8 +159,9 @@ cat /sys/kernel/debug/pinctrl/44e10800.pinmux/pins
 ```
 
 The last number in the line (hex) shows the setting for the pin according to the table below
+
 | Bit | Description                           |
-|-----|---------------------------------------|
+|:-----:| --------------------------------------- |
 | 6   | Slew rate. fast=0, slow=1             |
 | 5   | Receiver disable=0, enable=1          |
 | 4   | pulldown=0, pullup=1                  |
