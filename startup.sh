@@ -4,8 +4,26 @@
 echo cape-bone-iio > /sys/devices/bone_capemgr.8/slots
 
 #GPIO pins
-echo bspm_P8_41_17 > /sys/devices/bone_capemgr.8/slots
-echo 74 > /sys/class/gpio/export
+echo bspm_P8_3_f > /sys/devices/bone_capemgr.8/slots
+echo 38 > /sys/class/gpio/export
+echo bspm_P8_4_f > /sys/devices/bone_capemgr.8/slots
+echo 39 > /sys/class/gpio/export
+echo bspm_P8_5_f > /sys/devices/bone_capemgr.8/slots
+echo 34 > /sys/class/gpio/export
+echo bspm_P8_6_f > /sys/devices/bone_capemgr.8/slots
+echo 35 > /sys/class/gpio/export
+echo bspm_P8_9_37 > /sys/devices/bone_capemgr.8/slots
+echo 69 > /sys/class/gpio/export
+echo bspm_P8_10_17 > /sys/devices/bone_capemgr.8/slots
+echo 68 > /sys/class/gpio/export
+echo bspm_P8_11_17 > /sys/devices/bone_capemgr.8/slots
+echo 45 > /sys/class/gpio/export
+echo bspm_P8_16_f > /sys/devices/bone_capemgr.8/slots
+echo 46 > /sys/class/gpio/export
+echo bspm_P8_17_f > /sys/devices/bone_capemgr.8/slots
+echo 27 > /sys/class/gpio/export
+echo bspm_P8_35_f > /sys/devices/bone_capemgr.8/slots
+echo 8 > /sys/class/gpio/export
 
 #PWM
 echo am33xx_pwm > /sys/devices/bone_capemgr.8/slots
