@@ -24,6 +24,14 @@ echo bspm_P8_17_f > /sys/devices/bone_capemgr.8/slots
 echo 27 > /sys/class/gpio/export
 echo bspm_P8_35_f > /sys/devices/bone_capemgr.8/slots
 echo 8 > /sys/class/gpio/export
+echo bspm_P8_15_f > /sys/devices/bone_capemgr.8/slots
+echo 47 > /sys/class/gpio/export
+echo bspm_P8_14_f > /sys/devices/bone_capemgr.8/slots
+echo 26 > /sys/class/gpio/export
+echo bspm_P8_27_f > /sys/devices/bone_capemgr.8/slots
+echo 86 > /sys/class/gpio/export
+echo bspm_P8_28_f > /sys/devices/bone_capemgr.8/slots
+echo 88 > /sys/class/gpio/export
 
 #PWM
 echo am33xx_pwm > /sys/devices/bone_capemgr.8/slots
