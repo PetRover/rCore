@@ -81,6 +81,11 @@ Referenced from [here](http://jkuhlm.bplaced.net/hellobone/) *[do not follow the
 ssh-copy-id -i .ssh/id_rsa.pub root@192.168.7.2
 ```
 
+### Add bash profile for colored ls
+```
+scp etc/.profile root@192.168.7.2:~
+```
+
 ### Internet Connection Sharing
 
 #### Windows
