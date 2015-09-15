@@ -4,6 +4,7 @@ project(rCore)
 
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++")
+SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
 # Compiler-specific C++11 activation.
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
