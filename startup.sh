@@ -1,20 +1,23 @@
 #!/bin/bash
 
-#GPIO Cape
+#Analog Input Pins (enables all AIN pins)
 echo cape-bone-iio > /sys/devices/bone_capemgr.8/slots
 
 #GPIO pins
-echo bspm_P8_3_f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_3_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
 echo 38 > /sys/class/gpio/export
 
-echo bspm_P8_4_f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_4_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
 echo 39 > /sys/class/gpio/export
 
-echo bspm_P8_5_f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_5_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
 echo 34 > /sys/class/gpio/export
 
-echo bspm_P8_6_f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_6_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
 echo 35 > /sys/class/gpio/export
+
+echo bspm_P8_8_f > /sys/devices/bone_capemgr.8/slots
+echo 67 > /sys/class/gpio/export
 
 echo bspm_P8_9_37 > /sys/devices/bone_capemgr.8/slots
 echo 69 > /sys/class/gpio/export
@@ -24,6 +27,9 @@ echo 68 > /sys/class/gpio/export
 
 echo bspm_P8_11_17 > /sys/devices/bone_capemgr.8/slots
 echo 45 > /sys/class/gpio/export
+
+echo bspm_P8_12_f > /sys/devices/bone_capemgr.8/slots
+echo 44 > /sys/class/gpio/export
 
 echo bspm_P8_14_f > /sys/devices/bone_capemgr.8/slots
 echo 26 > /sys/class/gpio/export
@@ -40,16 +46,19 @@ echo 27 > /sys/class/gpio/export
 echo bspm_P8_18_2f > /sys/devices/bone_capemgr.8/slots
 echo 65 > /sys/class/gpio/export
 
-echo bspm_P8_20_37 > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_20_37 > /sys/devices/bone_capemgr.8/slots #used for rstctl_pin
 echo 63 > /sys/class/gpio/export
 
-echo bspm_P8_21_2f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_21_2f > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
 echo 62 > /sys/class/gpio/export
 
-echo bspm_P8_23_17 > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_22_7 > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
+echo 37 > /sys/class/gpio/export
+
+echo bspm_P8_23_17 > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
 echo 36 > /sys/class/gpio/export
 
-echo bspm_P8_24_2f > /sys/devices/bone_capemgr.8/slots
+echo bspm_P8_24_2f > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
 echo 33 > /sys/class/gpio/export
 
 echo bspm_P8_25_37 > /sys/devices/bone_capemgr.8/slots
@@ -136,6 +145,9 @@ echo 117 > /sys/class/gpio/export
 echo bspm_P9_27_f > /sys/devices/bone_capemgr.8/slots
 echo 115 > /sys/class/gpio/export
 
+echo bspm_P9_42_7 > /sys/devices/bone_capemgr.8/slots
+echo 7 > /sys/class/gpio/export
+
 #PWM
 echo am33xx_pwm > /sys/devices/bone_capemgr.8/slots
 
@@ -161,3 +173,12 @@ echo 1000000 > /sys/class/pwm/pwm5/period_ns
 echo 500000 > /sys/class/pwm/pwm5/duty_ns
 echo 1000000 > /sys/class/pwm/pwm6/period_ns
 echo 500000 > /sys/class/pwm/pwm6/duty_ns
+
+#SPI
+echo BB-SPIDEV1 > /sys/devices/bone_capemgr.8/slots
+
+#UART
+echo BB-UART1 > /sys/devices/bone_capemgr.8/slots
+
+#I2C
+echo BB-I2C1 > /sys/devices/bone_capemgr.8/slots
