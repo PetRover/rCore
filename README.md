@@ -16,6 +16,7 @@ git clone git@github.com:PetRover/rSensors.git
 git clone git@github.com:PetRover/rMotors.git
 git clone git@github.com:PetRover/rPowerSystems.git
 git clone git@github.com:PetRover/rTests.git
+git clone git@github.com:PetRover/rCamera.git
 ```
 
 ### Install IDE and Environment 
