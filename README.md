@@ -175,3 +175,65 @@ The last number in the line (hex) shows the setting for the pin according to the
 | 2-0 | Mode - between 0 and 7 (see SRM)      |
 
 A [cheat sheet](http://www.valvers.com/wp-content/uploads/2013/10/bbb_gpio_cheat.pdf) to identify pins by the pin number listed with these commands
+
+
+## Developing
+
+### Logging
+
+Instead of using printf or puts, we should add logging and debug messages using [easylogging++.h](https://github.com/easylogging/easyloggingpp).
+
+the standard way of logging is as follows:
+```
+#include "easylogging++.h"
+...
+...
+...
+LOG(LEVEL) << "Log Message";
+```
+where LEVEL is a logging level from the table below (except Verbose)
+
+To use a formatter similar to the one provied by printf, first create a logger object at the top of your library using:
+```
+el::Logger* logger = el::Loggers::getLogger("default");
+```
+and then log to a desired level such as "debug" in the following manner:
+```
+logger->debug("test %v", 1);
+```
+
+NOTE: instead of using formatters such as %f, just use %v
+
+the printf like functions are:
+- info(const char*, const T&, const Args&...)
+- warn(const char*, const T&, const Args&...)
+- error(const char*, const T&, const Args&...)
+- debug(const char*, const T&, const Args&...)
+- fatal(const char*, const T&, const Args&...)
+- trace(const char*, const T&, const Args&...)
+- verbose(int vlevel, const char*, const T&, const Args&...)
+
+COOL FEATURE: STL Logging. you can send stl objects such as vectors to the logger and it will print them with pretty formatting.
+
+
+#### Log level guidelines
+
+| Level | Description                           |
+|:-----:| --------------------------------------- |
+| DEBUG | Use for live developemnt and debug... should be removed before pushing to master branch  |
+| FATAL | Use for logging information about events that will cause the program to crash       |
+| ERROR | Use for logging information about events that will cause operational problems but will not crash |
+| WARNING | Use for displaying issues. This could be improper usage of libraries or runtime conditions that should be noted |
+| INFO | Use for general runtime display. Anything that print frequently/repeatedly should not be logged at this level |
+| Verbose* | Every library should included sufficient logs at verbose levels 1-3 to give an observer a clear idea of what the program in doing at each step. [LOG_EVERY_N](https://github.com/easylogging/easyloggingpp#occasional-logging) should be used in situations where logging every loop would produce excessive output |
+ * for verbose logging, use ```VLOG(#) << "Log message";``` instead of ```LOG(LEVEL) << "Log message"; ``` where # is the verbose logging level
+
+#### To turn on verbose
+verbose logging is turned on by passign the -v command line parameter. Verbose logging at a specific level can be turned on for a specific soruce file by passing the following arg to the execuatable ```-vmodule=*<name>*=#``` where name is the name of the soruce file and # is the logging level to be activated. documentation of this feature can be found [here](https://github.com/easylogging/easyloggingpp#application-arguments)
+
+
+#### Features we might want to use in the future
+- [Performace tracking](https://github.com/easylogging/easyloggingpp#performance-tracking)
+- [Trheading](https://github.com/easylogging/easyloggingpp#multi-threading)
+- [Syslog](https://github.com/easylogging/easyloggingpp#syslog)
+
