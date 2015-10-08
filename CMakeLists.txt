@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.3)
 
 project(rCore)
-
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++")
 SET(CMAKE_VERBOSE_MAKEFILE OFF)
@@ -17,6 +16,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 else ()
     message(FATAL_ERROR "Your C++ compiler does not support C++11.")
 endif ()
+
+add_subdirectory("./../rCamera" "rCamera")
+include_directories("./../rCamera")
 
 add_subdirectory("./../rMotors" "rMotors")
 include_directories("./../rMotors")
@@ -38,6 +40,7 @@ include_directories("./../rTests")
 
 add_executable(rCore core.cpp)
 
+#target_link_libraries(rCore rCamera)
 target_link_libraries(rCore rMotors)
 target_link_libraries(rCore rProtocols)
 target_link_libraries(rCore rSensors)
