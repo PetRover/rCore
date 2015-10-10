@@ -40,7 +40,7 @@ include_directories("./../rTests")
 
 add_executable(rCore core.cpp)
 
-#target_link_libraries(rCore rCamera)
+target_link_libraries(rCore rCamera)
 target_link_libraries(rCore rMotors)
 target_link_libraries(rCore rProtocols)
 target_link_libraries(rCore rSensors)
