@@ -5,4 +5,6 @@
 #ifndef FIRMWARE_CORE_H
 #define FIRMWARE_CORE_H
 
+#include "rMotors.h"
+
 #endif //FIRMWARE_CORE_H
