@@ -1,28 +1,30 @@
 /*
-* Device tree overlay for beagle bone
+* Copyright (C) 2012 Texas Instruments Incorporated - http:www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation.
 */
-
 /dts-v1/;
 /plugin/;
 
-/{
-   compatible = "ti,beaglebone", "ti,beaglebone-black";
-   part_number = "rover_board_rev1";
-
-   exclusive-use =
-        /* MOTOR SHARED PINS */
-                “P8.11”, /*Drive Sleep */
+/ { compatible = "ti,beaglebone", "ti,beaglebone-black";
+    /* identification */
+    part-number = "rover_board_rev1";
+    
+    exclusive-use =        /* MOTOR SHARED PINS */
+                "P8.11", /*Drive Sleep */
                 "P8.26", /* Drive Reset*/
-                “P8.39”, /* Treat Motor IN2/Camera Motor AIN2*/
+                "P8.39", /* Treat Motor IN2/Camera Motor AIN2*/
                 "P8.40", /* Motor Decay */
-                “P8.42”, /* Treat Motor I1/Camera Motor AI0 */
-                “P8.43”, /* Treat Motor I2/Camera Motor AI1 */
-                “P8.44”, /* Treat Motor I3/Camera Motor BI0 */
-                “P8.45”, /* Treat Motor I4/Camera Motor BI1 */
-                /* NOT GPIO “P8.46”, /* Treat Motor IN1/Camera Motor AIN1 */ */
+                "P8.42", /* Treat Motor I1/Camera Motor AI0 */
+                "P8.43", /* Treat Motor I2/Camera Motor AI1 */
+                "P8.44", /* Treat Motor I3/Camera Motor BI0 */
+                "P8.45", /* Treat Motor I4/Camera Motor BI1 */
+                /* NOT GPIO "P8.46",  Treat Motor IN1/Camera Motor AIN1 */
 
         /* DRIVE MOTOR A */
-                /* NOT GPIO "P8.36", /* Drive A IN 1 */ */
+                /* NOT GPIO "P8.36",  Drive A IN 1 */
                 "P8.27", /* Drive A IN 2 */
                 "P8.28", /* Drive A I0 */
                 "P8.30", /* Drive A I1 */
@@ -33,16 +35,15 @@
                 /* SHARED  Drive A Sleep */
                 /* SHARED  Drive A Reset */
                 /* SHARED  Drive A Decay */
-        
         /* DRIVE MOTOR B */
-                /* NOT GPIO “P8.19”, /*Drive B IN1 */ */
-                “P8.16”, /* Drive B IN2 */
-                “P8.12”, /* Drive B I0 */
-                “P8.13”, /* Drive B I2 */
-                “P8.14”, /* Drive B I1 */
-                “P8.15”, /* Drive B I3 */
-                “P8.17”, /* Drive B I4 */
-                “P8.9”, /* Drive B Fault */
+                /* NOT GPIO "P8.19",  Drive B IN1 */
+                "P8.16", /* Drive B IN2 */
+                "P8.12", /* Drive B I0 */
+                "P8.13", /* Drive B I2 */
+                "P8.14", /* Drive B I1 */
+                "P8.15", /* Drive B I3 */
+                "P8.17", /* Drive B I4 */
+                "P8.9", /* Drive B Fault */
                 /* SHARED  Drive B Sleep */
                 /* SHARED  Drive B Reset */
                 /* SHARED  Drive B Decay */
@@ -50,18 +51,18 @@
         /* DRIVE MOTOR TREAT */
                 /* SHARED NOT GPIO Treat Motor IN1 */
                 /* SHARED Treat Motor IN2 */
-                “P8.41”, /* Treat Motor I0 */
+                "P8.41", /* Treat Motor I0 */
                 /* SHARED Treat Motor I1 */
                 /* SHARED Treat Motor I2 */
                 /* SHARED Treat Motor I3 */
                 /* SHARED Treat Motor I4 */
-                “P8.35”, /* Treat Motor Reset */
-                “P8.37”, /* Treat Motor Fault */
-                “P8.38”, /* Treat Motor Sleep */
+                "P8.35", /* Treat Motor Reset */
+                "P8.37", /* Treat Motor Fault */
+                "P8.38", /* Treat Motor Sleep */
                 /* SHARED  Treat Motor  Decay */
 
         /* CAM MOTOR */
-                /* NOT GPIO "P9.16", // Camera Motor B IN 1 */
+                /* NOT GPIO "P9.16",  Camera Motor B IN 1 */
                 "P9.11", /* Camera Motor B IN 2 */
                 /* SHARED  Camera A IN 1  */
                 /* SHARED  Camera A IN 2 */
@@ -76,10 +77,10 @@
         /* WIFI */
                 "P9.12", /* Wifi HIB */
                 "P9.15", /* Wifi Reset */
-                /* NOT GPIO "P9.28", // Wifi SPI CS */
-                /* NOT GPIO "P9.29", // Wifi SPI MISO */
-                /* NOT GPIO "P9.30", // Wifi SPI MOSI */
-                /* NOT GPIO "P9.31", // Wifi SPI CLK */
+                /* NOT GPIO "P9.28",  Wifi SPI CS */
+                /* NOT GPIO "P9.29",  Wifi SPI MISO */
+                /* NOT GPIO "P9.30",  Wifi SPI MOSI */
+                /* NOT GPIO "P9.31",  Wifi SPI CLK */
                 "P9.41", /* Wifi Host Interrupt  */
 
         /* 3V3 REGULATOR */
@@ -93,7 +94,7 @@
         /* FUEL GAUGE */
                 /* NOT GPIO FUEL SCL */
                 /* NOT GPIO FUEL SDA */
-                /* ERROR - NOT GPIO"P9.32", // FUEL ALCC */
+                /* ERROR - NOT GPIO"P9.32",  FUEL ALCC */
 
         /* SENSORS */
                 "P9.14", /* Cam Limit Switch 1 */
@@ -103,29 +104,29 @@
                 "P9.22", /* Treat Position Sensor 3 */
                 "P9.23", /*  Charger Connected Detection */
 
-                /* NOT GPIO "P9.40", //  Treat count ADC 1 */
-                /* NOT GPIO "P9.39", //  Treat count ADC 2 */
-                /* NOT GPIO "P9.38", //  Treat count ADC 3 */
-                /* NOT GPIO "P9.37", //  Treat count ADC 4 */
-                /* NOT GPIO "P9.42", //  Extra ADC */
+                /* NOT GPIO "P9.40",   Treat count ADC 1 */
+                /* NOT GPIO "P9.39",   Treat count ADC 2 */
+                /* NOT GPIO "P9.38",   Treat count ADC 3 */
+                /* NOT GPIO "P9.37",   Treat count ADC 4 */
+                /* NOT GPIO "P9.42",   Extra ADC */
 
         /* ======================================= */
         /* HARDWARE NAME */
         /* ======================================= */
 
         /* MOTOR SHARED PINS */
-                “gpio1_13”, /*Drive Sleep  */
+                "gpio1_13", /*Drive Sleep  */
                 "gpio1_29", /* Drive Reset */
-                “gpio2_12”, /* Treat Motor IN2/Camera Motor AIN2 */
+                "gpio2_12", /* Treat Motor IN2/Camera Motor AIN2 */
                 "gpio2_13", /* Motor Decay */
-                “gpio2_11”, /* Treat Motor I1/Camera Motor AI0 */
-                “gpio2_8”, /* Treat Motor I2/Camera Motor AI1 */
-                “gpio2_9”, /* Treat Motor I3/Camera Motor BI0 */
-                “gpio2_6”, /* Treat Motor I4/Camera Motor BI1 */
-                /* NOT GPIO “P8.46”, // Treat Motor IN1/Camera Motor AIN1 */
+                "gpio2_11", /* Treat Motor I1/Camera Motor AI0 */
+                "gpio2_8", /* Treat Motor I2/Camera Motor AI1 */
+                "gpio2_9", /* Treat Motor I3/Camera Motor BI0 */
+                "gpio2_6", /* Treat Motor I4/Camera Motor BI1 */
+                /* NOT GPIO "P8.46",  Treat Motor IN1/Camera Motor AIN1 */
 
         /* DRIVE MOTOR A */
-                /* NOT GPIO "P8.36", // Drive A IN 1 */
+                /* NOT GPIO "P8.36",  Drive A IN 1 */
                 "gpio2_22", /* Drive A IN 2 */
                 "gpio2_24", /* Drive A I0 */
                 "gpio2_25", /* Drive A I1 */
@@ -136,16 +137,16 @@
                 /* SHARED  Drive A Sleep */
                 /* SHARED  Drive A Reset */
                 /* SHARED  Drive A Decay */
-        
+                
         /* DRIVE MOTOR B */
-                /* NOT GPIO “P8.19”, //Drive B IN1 */
-                “gpio1_14”, /* Drive B IN2 */
-                “gpio1_12”, /* Drive B I0 */
-                “gpio0_23”, /* Drive B I2 */
-                “gpio0_26”, /* Drive B I1 */
-                “gpio1_15”, /* Drive B I3 */
-                “gpio0_27”, /* Drive B I4 */
-                “gpio2_5”, /* Drive B Fault */
+                /* NOT GPIO "P8.19", Drive B IN1 */
+                "gpio1_14", /* Drive B IN2 */
+                "gpio1_12", /* Drive B I0 */
+                "gpio0_23", /* Drive B I2 */
+                "gpio0_26", /* Drive B I1 */
+                "gpio1_15", /* Drive B I3 */
+                "gpio0_27", /* Drive B I4 */
+                "gpio2_5", /* Drive B Fault */
                 /* SHARED  Drive B Sleep */
                 /* SHARED  Drive B Reset */
                 /* SHARED  Drive B Decay */
@@ -153,18 +154,18 @@
         /* DRIVE MOTOR TREAT */
                 /* SHARED NOT GPIO Treat Motor IN1 */
                 /* SHARED Treat Motor IN2 */
-                “gpio2_10”, /* Treat Motor I0 */
+                "gpio2_10", /* Treat Motor I0 */
                 /* SHARED Treat Motor I1 */
                 /* SHARED Treat Motor I2 */
                 /* SHARED Treat Motor I3 */
                 /* SHARED Treat Motor I4 */
-                “gpio0_8”, /* Treat Motor Reset */
-                “gpio2_14”, /* Treat Motor Fault */
-                “gpio2_15”, /* Treat Motor Sleep */
+                "gpio0_8", /* Treat Motor Reset */
+                "gpio2_14", /* Treat Motor Fault */
+                "gpio2_15", /* Treat Motor Sleep */
                 /* SHARED  Treat Motor  Decay */
 
         /* CAM MOTOR */
-                /* NOT GPIO "P9.16", // Camera Motor B IN 1 */
+                /* NOT GPIO "P9.16",  Camera Motor B IN 1 */
                 "gpio0_30", /* Camera Motor B IN 2 */
                 /* SHARED  Camera A IN 1  */
                 /* SHARED  Camera A IN 2 */
@@ -179,10 +180,10 @@
         /* WIFI */
                 "gpio1_28", /* Wifi HIB */
                 "gpio1_16", /* Wifi Reset */
-                /* NOT GPIO "P9.28", // Wifi SPI CS */
-                /* NOT GPIO "P9.29", // Wifi SPI MISO */
-                /* NOT GPIO "P9.30", // Wifi SPI MOSI */
-                /* NOT GPIO "P9.31", // Wifi SPI CLK */
+                /* NOT GPIO "P9.28",  Wifi SPI CS */
+                /* NOT GPIO "P9.29",  Wifi SPI MISO */
+                /* NOT GPIO "P9.30",  Wifi SPI MOSI */
+                /* NOT GPIO "P9.31",  Wifi SPI CLK */
                 "gpio0_20", /* Wifi Host Interrupt  */
 
         /* 3V3 REGULATOR */
@@ -191,12 +192,12 @@
                 "gpio3_19", /* 3V3 REG EN */
 
         /* 12V REGULATOR */
-                “gpio0_14", /* 3V3 REG EN */
+                "gpio0_14", /* 3V3 REG EN */
 
         /* FUEL GAUGE */
                 /* NOT GPIO FUEL SCL */
                 /* NOT GPIO FUEL SDA */
-                /* ERROR - NOT GPIO"P9.32", // FUEL ALCC */
+                /* ERROR - NOT GPIO"P9.32",  FUEL ALCC */
 
         /* SENSORS */
                 "gpio1_18", /* Cam Limit Switch 1 */
@@ -204,20 +205,20 @@
                 "gpio0_12", /* Treat Position Sensor 1 */
                 "gpio0_3", /* Treat Position Sensor 2 */
                 "gpio0_2", /* Treat Position Sensor 3 */
-                “gpio1_17" /*  Charger Connected Detection */
+                "gpio1_17" /*  Charger Connected Detection */
 
-                /* NOT GPIO "P9.40", //  Treat count ADC 1 */
-                /* NOT GPIO "P9.39", //  Treat count ADC 2 */
-                /* NOT GPIO "P9.38", //  Treat count ADC 3 */
-                /* NOT GPIO "P9.37", //  Treat count ADC 4 */
-                /* NOT GPIO "P9.42", //  Extra ADC */
+                /* NOT GPIO "P9.40",   Treat count ADC 1 */
+                /* NOT GPIO "P9.39",   Treat count ADC 2 */
+                /* NOT GPIO "P9.38",   Treat count ADC 3 */
+                /* NOT GPIO "P9.37",   Treat count ADC 4 */
+                /* NOT GPIO "P9.42",   Extra ADC */
         ;
-
-   fragment@0 {
-       target = <&am33xx_pinmux>;
-       __overlay__ {
-           rover_board : rover_board_rev1_pins {
-               pinctrl-single,pins = <
+    
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            rover_board_rev1: rover_board_rev1_pins {
+                pinctrl-single,pins = <
                 /* MOTOR SHARED PINS */
                         0x034 0x17 /* Drive Sleep  */
                         0x07c 0x17 /* Drive Reset */
@@ -241,7 +242,7 @@
                         /* SHARED  Drive A Sleep */
                         /* SHARED  Drive A Reset */
                         /* SHARED  Drive A Decay */
-
+                        
                 /* DRIVE MOTOR B */
                         /*NOT GPIO “P8.19”, //Drive B IN1 */
                         0x038 0x0f /* Drive B IN2 */
@@ -317,19 +318,19 @@
                         /* NOT GPIO "P9.37", //  Treat count ADC 4 */
                         /* NOT GPIO "P9.42", //  Extra ADC */
                 >;
-           };
-       };
-   };
+            };
+        };
+    };
 
-   fragment@1 {
-       target = <&ocp>;
-       __overlay__ {
-           test_helper: helper {
-               compatible = "bone-pinmux-helper";
-               status = "okay";
-               pinctrl-names = "default";
-               pinctrl-0 = <&rover_board>;
-           };
-       };
-   };
+    fragment@1 {
+        target = <&ocp>;
+        __overlay__ {
+            test_helper: helper {
+                compatible = "bone-pinmux-helper";
+                pinctrl-names = "default";
+                pinctrl-0 = <&rover_board_rev1>;
+                status = "okay";
+            };
+        };
+    };
 };
