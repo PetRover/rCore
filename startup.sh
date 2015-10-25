@@ -4,7 +4,7 @@
 echo cape-bone-iio > /sys/devices/bone_capemgr.8/slots
 
 #GPIO pins
-###Need to load cape
+echo rover_board_rev1 > /sys/devices/bone_capemgr.8/slots
 
 #P8_8
 echo 67 > /sys/class/gpio/export
