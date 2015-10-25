@@ -248,7 +248,7 @@
                         0x030 0x0f /* Drive B I0 */
                         0x024 0x0f /* Drive B I2 */
                         0x028 0x0f /* Drive B I1 */
-                        “gpio1_15 0x0f /* Drive B I3 */
+                        0x03c 0x0f /* Drive B I3 */
                         0x02c 0x0f /* Drive B I4 */
                         0x09c 0x37 /* Drive B Fault */
                         /* SHARED  Drive B Sleep */
