@@ -4,148 +4,144 @@
 echo cape-bone-iio > /sys/devices/bone_capemgr.8/slots
 
 #GPIO pins
-#echo bspm_P8_3_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
-#echo 38 > /sys/class/gpio/export
+###Need to load cape
 
-#echo bspm_P8_4_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
-#echo 39 > /sys/class/gpio/export
-
-#echo bspm_P8_5_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
-#echo 34 > /sys/class/gpio/export
-
-#echo bspm_P8_6_f > /sys/devices/bone_capemgr.8/slots #used by EMMC
-#echo 35 > /sys/class/gpio/export
-
-echo bspm_P8_8_f > /sys/devices/bone_capemgr.8/slots
+#P8_8
 echo 67 > /sys/class/gpio/export
 
-echo bspm_P8_9_37 > /sys/devices/bone_capemgr.8/slots
+#P8_9
 echo 69 > /sys/class/gpio/export
 
-echo bspm_P8_10_17 > /sys/devices/bone_capemgr.8/slots
+#P8_10
 echo 68 > /sys/class/gpio/export
 
-echo bspm_P8_11_17 > /sys/devices/bone_capemgr.8/slots
+#P8_11
 echo 45 > /sys/class/gpio/export
 
-echo bspm_P8_12_f > /sys/devices/bone_capemgr.8/slots
+#P8_12
 echo 44 > /sys/class/gpio/export
 
-echo bspm_P8_14_f > /sys/devices/bone_capemgr.8/slots
+#P8_13
+echo 23 > /sys/class/gpio/export
+
+#P8_14
 echo 26 > /sys/class/gpio/export
 
-echo bspm_P8_15_f > /sys/devices/bone_capemgr.8/slots
+#P8_15
 echo 47 > /sys/class/gpio/export
 
-echo bspm_P8_16_f > /sys/devices/bone_capemgr.8/slots
+#P8_16
 echo 46 > /sys/class/gpio/export
 
-echo bspm_P8_17_f > /sys/devices/bone_capemgr.8/slots
+#P8_17
 echo 27 > /sys/class/gpio/export
 
-echo bspm_P8_18_2f > /sys/devices/bone_capemgr.8/slots
-echo 65 > /sys/class/gpio/export
-
-#echo bspm_P8_20_37 > /sys/devices/bone_capemgr.8/slots #used for rstctl_pin
-#echo 63 > /sys/class/gpio/export
-
-#echo bspm_P8_21_2f > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
-#echo 62 > /sys/class/gpio/export
-
-#echo bspm_P8_22_7 > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
-#echo 37 > /sys/class/gpio/export
-
-#echo bspm_P8_23_17 > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
-#echo 36 > /sys/class/gpio/export
-
-#echo bspm_P8_24_2f > /sys/devices/bone_capemgr.8/slots #used by user_LED pin
-#echo 33 > /sys/class/gpio/export
-
-echo bspm_P8_25_37 > /sys/devices/bone_capemgr.8/slots #In use, but not specified in pingroups
+#P8_25
 echo 32 > /sys/class/gpio/export
 
-echo bspm_P8_26_2f > /sys/devices/bone_capemgr.8/slots
+#P8_26
 echo 61 > /sys/class/gpio/export
 
-echo bspm_P8_27_f > /sys/devices/bone_capemgr.8/slots
+#P8_27
 echo 86 > /sys/class/gpio/export
 
-echo bspm_P8_28_f > /sys/devices/bone_capemgr.8/slots
+#P8_28
 echo 88 > /sys/class/gpio/export
 
-echo bspm_P8_29_f > /sys/devices/bone_capemgr.8/slots
+#P8_29
 echo 87 > /sys/class/gpio/export
 
-echo bspm_P8_30_f > /sys/devices/bone_capemgr.8/slots
+#P8_30
 echo 89 > /sys/class/gpio/export
 
-echo bspm_P8_33_17 > /sys/devices/bone_capemgr.8/slots
-echo 9 > /sys/class/gpio/export
+#P8_31
+echo 10 > /sys/class/gpio/export
 
-echo bspm_P8_34_2f > /sys/devices/bone_capemgr.8/slots
+#P8_34
 echo 81 > /sys/class/gpio/export
 
-echo bspm_P8_35_f > /sys/devices/bone_capemgr.8/slots
+#P8_35
 echo 8 > /sys/class/gpio/export
 
-echo bspm_P8_36_f > /sys/devices/bone_capemgr.8/slots
+#P8_36
 echo 80 > /sys/class/gpio/export
 
-echo bspm_P8_39_17 > /sys/devices/bone_capemgr.8/slots
+#P8_37
+echo 78 > /sys/class/gpio/export
+
+#P8_38
+echo 79 > /sys/class/gpio/export
+
+#P8_39
 echo 76 > /sys/class/gpio/export
 
-echo bspm_P8_40_37 > /sys/devices/bone_capemgr.8/slots
+#P8_40
 echo 77 > /sys/class/gpio/export
 
-echo bspm_P8_41_2f > /sys/devices/bone_capemgr.8/slots
+#P8_41
 echo 74 > /sys/class/gpio/export
 
-echo bspm_P8_42_f > /sys/devices/bone_capemgr.8/slots
+#P8_42
 echo 75 > /sys/class/gpio/export
 
-echo bspm_P8_43_f > /sys/devices/bone_capemgr.8/slots
+#P8_43
 echo 72 > /sys/class/gpio/export
 
-echo bspm_P8_44_f > /sys/devices/bone_capemgr.8/slots
+#P8_44
 echo 73 > /sys/class/gpio/export
 
-echo bspm_P8_45_f > /sys/devices/bone_capemgr.8/slots
+#P8_45
 echo 70 > /sys/class/gpio/export
 
-echo bspm_P8_46_f > /sys/devices/bone_capemgr.8/slots
+#P8_46
 echo 71 > /sys/class/gpio/export
 
-echo bspm_P9_11_7 > /sys/devices/bone_capemgr.8/slots
+#P9_11
 echo 30 > /sys/class/gpio/export
 
-echo bspm_P9_12_17 > /sys/devices/bone_capemgr.8/slots
+#P9_12
 echo 60 > /sys/class/gpio/export
 
-echo bspm_P9_13_7 > /sys/devices/bone_capemgr.8/slots
+#P9_13
 echo 31 > /sys/class/gpio/export
 
-echo bspm_P9_15_f > /sys/devices/bone_capemgr.8/slots
+#P9_14
+echo 50 > /sys/class/gpio/export
+
+#P9_15
 echo 48 > /sys/class/gpio/export
 
-echo bspm_P9_19_f > /sys/devices/bone_capemgr.8/slots
+#P9_19
 echo 13 > /sys/class/gpio/export
 
-echo bspm_P9_20_f > /sys/devices/bone_capemgr.8/slots
+#P9_20
 echo 12 > /sys/class/gpio/export
 
-echo bspm_P9_22_f > /sys/devices/bone_capemgr.8/slots
+#P9_21
+echo 3 > /sys/class/gpio/export
+
+#P9_22
 echo 2 > /sys/class/gpio/export
 
-echo bspm_P9_23_17 > /sys/devices/bone_capemgr.8/slots
+#P9_23
 echo 49 > /sys/class/gpio/export
 
-echo bspm_P9_25_27 > /sys/devices/bone_capemgr.8/slots
+#P9_24
+echo 15 > /sys/class/gpio/export
+
+#P9_25
 echo 117 > /sys/class/gpio/export
 
-echo bspm_P9_27_f > /sys/devices/bone_capemgr.8/slots
+#P9_26
+echo 14 > /sys/class/gpio/export
+
+#P9_27
 echo 115 > /sys/class/gpio/export
 
-echo bspm_P9_42_7 > /sys/devices/bone_capemgr.8/slots
+#P9_41
+echo 20 > /sys/class/gpio/export
+
+#P9_42
 echo 7 > /sys/class/gpio/export
 
 #PWM
