@@ -147,17 +147,15 @@ echo 7 > /sys/class/gpio/export
 #PWM
 echo am33xx_pwm > /sys/devices/bone_capemgr.8/slots
 
-echo 1 > /sys/class/pwm/export #9_21
-echo 3 > /sys/class/pwm/export #9_14
 echo 4 > /sys/class/pwm/export #9_16
 echo 5 > /sys/class/pwm/export #8_19
-echo 6 > /sys/class/pwm/export #8_13
+echo 6 > /sys/class/pwm/export #8_46
+echo 3 > /sys/class/pwm/export #8_36
 
-echo bone_pwm_P8_13 > /sys/devices/bone_capemgr.8/slots #DRIVE_A_IN1
-echo bone_pwm_P8_19 > /sys/devices/bone_capemgr.8/slots #MTR_TREAT_IN1
-echo bone_pwm_P9_14 > /sys/devices/bone_capemgr.8/slots #MTR_CAM_AIN1
-echo bone_pwm_P9_16 > /sys/devices/bone_capemgr.8/slots #DRIVE_B_IN1
-echo bone_pwm_P9_21 > /sys/devices/bone_capemgr.8/slots #MTR_CAM_BIN1
+echo bone_pwm_P8_19 > /sys/devices/bone_capemgr.8/slots
+echo bone_pwm_P9_16 > /sys/devices/bone_capemgr.8/slots
+echo bone_pwm_P8_46 > /sys/devices/bone_capemgr.8/slots
+echo bone_pwm_P8_36 > /sys/devices/bone_capemgr.8/slots
 
 echo 1000000 > /sys/class/pwm/pwm1/period_ns
 echo 500000 > /sys/class/pwm/pwm1/duty_ns
