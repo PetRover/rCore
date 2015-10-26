@@ -169,8 +169,5 @@ echo 500000 > /sys/class/pwm/pwm6/duty_ns
 #SPI
 echo BB-SPIDEV1 > /sys/devices/bone_capemgr.8/slots
 
-#UART
-echo BB-UART1 > /sys/devices/bone_capemgr.8/slots
-
 #I2C
 echo BB-I2C1 > /sys/devices/bone_capemgr.8/slots
