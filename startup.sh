@@ -157,8 +157,6 @@ echo bone_pwm_P9_16 > /sys/devices/bone_capemgr.8/slots
 echo bone_pwm_P8_46 > /sys/devices/bone_capemgr.8/slots
 echo bone_pwm_P8_36 > /sys/devices/bone_capemgr.8/slots
 
-echo 1000000 > /sys/class/pwm/pwm1/period_ns
-echo 500000 > /sys/class/pwm/pwm1/duty_ns
 echo 1000000 > /sys/class/pwm/pwm3/period_ns
 echo 500000 > /sys/class/pwm/pwm3/duty_ns
 echo 1000000 > /sys/class/pwm/pwm4/period_ns
