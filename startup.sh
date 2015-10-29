@@ -157,14 +157,15 @@ echo bone_pwm_P9_16 > /sys/devices/bone_capemgr.8/slots
 echo bone_pwm_P8_46 > /sys/devices/bone_capemgr.8/slots
 echo bone_pwm_P8_36 > /sys/devices/bone_capemgr.8/slots
 
-echo 1000000 > /sys/class/pwm/pwm3/period_ns
-echo 500000 > /sys/class/pwm/pwm3/duty_ns
-echo 1000000 > /sys/class/pwm/pwm4/period_ns
-echo 500000 > /sys/class/pwm/pwm4/duty_ns
-echo 1000000 > /sys/class/pwm/pwm5/period_ns
-echo 500000 > /sys/class/pwm/pwm5/duty_ns
-echo 1000000 > /sys/class/pwm/pwm6/period_ns
-echo 500000 > /sys/class/pwm/pwm6/duty_ns
+# DEFAULT PWM FREQUENCY = 100kHz (AND 50% Duty Cycle)
+echo 10000 > /sys/class/pwm/pwm3/period_ns
+echo 5000 > /sys/class/pwm/pwm3/duty_ns
+echo 10000 > /sys/class/pwm/pwm4/period_ns
+echo 5000 > /sys/class/pwm/pwm4/duty_ns
+echo 10000 > /sys/class/pwm/pwm5/period_ns
+echo 5000 > /sys/class/pwm/pwm5/duty_ns
+echo 10000 > /sys/class/pwm/pwm6/period_ns
+echo 5000 > /sys/class/pwm/pwm6/duty_ns
 
 #SPI
 echo BB-SPIDEV1 > /sys/devices/bone_capemgr.8/slots
