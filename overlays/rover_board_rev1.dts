@@ -31,7 +31,7 @@
                 "P8.29", /* Drive A I2 */
                 "P8.31", /* Drive A I3 */
                 "P8.34", /* Drive A I4 */
-                "P8.25", /* Drive A FAULT */
+                /*"P8.25", NOTE REMOVED DUE TO CONFLICT WITH EMMC  Drive A FAULT */
                 /* SHARED  Drive A Sleep */
                 /* SHARED  Drive A Reset */
                 /* SHARED  Drive A Decay */
@@ -98,8 +98,8 @@
 
         /* SENSORS */
                 "P9.14", /* Cam Limit Switch 1 */
-                "P9.19", /* Cam Limit Switch 2 */
-                "P9.20", /* Treat Position Sensor 1 */
+                /* "P9.19", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2  Cam Limit Switch 2 */
+                /*"P9.20", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2 Treat Position Sensor 1 */
                 "P9.21", /* Treat Position Sensor 2 */
                 "P9.22", /* Treat Position Sensor 3 */
                 "P9.23", /*  Charger Connected Detection */
@@ -201,8 +201,8 @@
 
         /* SENSORS */
                 "gpio1_18", /* Cam Limit Switch 1 */
-                "gpio0_13", /* Cam Limit Switch 2 */
-                "gpio0_12", /* Treat Position Sensor 1 */
+                /* "gpio0_13", NOTE COMMENTED OUT BECAUSE OF CONFLICT WITH I2C2 Cam Limit Switch 2 */
+                /* "gpio0_12", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2 Treat Position Sensor 1 */
                 "gpio0_3", /* Treat Position Sensor 2 */
                 "gpio0_2", /* Treat Position Sensor 3 */
                 "gpio1_17" /*  Charger Connected Detection */
@@ -306,8 +306,8 @@
 
                 /* SENSORS */
                         0x048 0x2f /* Cam Limit Switch 1 */
-                        0x17c 0x2f /* Cam Limit Switch 2 */
-                        0x178 0x2f /* Treat Position Sensor 1 */
+                        /*0x17c 0x2f NOTE COMMENTED OUT BECAUSE OF CONFLICT WITH I2C2 Cam Limit Switch 2 */
+                        /*0x178 0x2f NOTE COMMENTED OUT BECAUSE OF CONFLICT WITH I2C2 Treat Position Sensor 1 */
                         0x154 0x2f /* Treat Position Sensor 2 */
                         0x150 0x2f /* Treat Position Sensor 3 */
                         0x044 0x0f /*  Charger Connected Detection */
