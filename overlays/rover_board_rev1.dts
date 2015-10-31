@@ -89,7 +89,7 @@
                 "P9.27", /* 3V3 REG EN */
 
         /* 12V REGULATOR */
-                "P9.26", /* 3V3 REG EN */
+                "P9.26", /* 12V REG EN */
 
         /* FUEL GAUGE */
                 /* NOT GPIO FUEL SCL */
@@ -192,7 +192,7 @@
                 "gpio3_19", /* 3V3 REG EN */
 
         /* 12V REGULATOR */
-                "gpio0_14", /* 3V3 REG EN */
+                "gpio0_14", /* 12V REG EN */
 
         /* FUEL GAUGE */
                 /* NOT GPIO FUEL SCL */
