@@ -10,6 +10,6 @@ make
 
 ip=${1-text}
 echo $ip
-scp ../bin/rCore root@${ip}:/home/root/rover
-scp ../bin/rTests root@${ip}:/home/root/rover
+scp ../bin/rCore root@${ip}:/root/rover
+scp ../bin/rTests root@${ip}:/root/rover
 cd ..
