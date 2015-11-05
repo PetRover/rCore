@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #Analog Input Pins (enables all AIN pins)
-echo cape-bone-iio > /sys/devices/bone_capemgr.9/slots
+#echo cape-bone-iio > /sys/devices/platform/bone_capemgr/slots
 
 #GPIO pins
-echo rover_board_rev1 > /sys/devices/bone_capemgr.9/slots
+echo rover_board_rev1 > /sys/devices/platform/bone_capemgr/slots
 
 #P8_8
 echo 67 > /sys/class/gpio/export
@@ -145,30 +145,29 @@ echo 20 > /sys/class/gpio/export
 echo 7 > /sys/class/gpio/export
 
 #PWM
-echo am33xx_pwm > /sys/devices/bone_capemgr.9/slots
+echo BB-PWM1A > /sys/devices/platform/bone_capemgr/slots
+echo BB-PWM1B > /sys/devices/platform/bone_capemgr/slots
+echo BB-PWM2A > /sys/devices/platform/bone_capemgr/slots
+echo BB-PWM2B > /sys/devices/platform/bone_capemgr/slots
+sleep 0.5
 
-echo 4 > /sys/class/pwm/export #9_16
-echo 5 > /sys/class/pwm/export #8_19
-echo 6 > /sys/class/pwm/export #8_46
-echo 3 > /sys/class/pwm/export #8_36
-
-echo bone_pwm_P8_19 > /sys/devices/bone_capemgr.9/slots
-echo bone_pwm_P9_16 > /sys/devices/bone_capemgr.9/slots
-echo bone_pwm_P8_46 > /sys/devices/bone_capemgr.9/slots
-echo bone_pwm_P8_36 > /sys/devices/bone_capemgr.9/slots
+echo 0 > /sys/class/pwm/pwmchip0/export #8_36
+echo 1 > /sys/class/pwm/pwmchip0/export #8_19
+echo 0 > /sys/class/pwm/pwmchip2/export #9_16
+echo 1 > /sys/class/pwm/pwmchip2/export #8_46
 
 # DEFAULT PWM FREQUENCY = 100kHz (AND 50% Duty Cycle)
-echo 10000 > /sys/class/pwm/pwm3/period_ns
-echo 5000 > /sys/class/pwm/pwm3/duty_ns
-echo 10000 > /sys/class/pwm/pwm4/period_ns
-echo 5000 > /sys/class/pwm/pwm4/duty_ns
-echo 10000 > /sys/class/pwm/pwm5/period_ns
-echo 5000 > /sys/class/pwm/pwm5/duty_ns
-echo 10000 > /sys/class/pwm/pwm6/period_ns
-echo 5000 > /sys/class/pwm/pwm6/duty_ns
+echo 10000 > /sys/class/pwm/pwmchip0/pwm0/period
+echo 5000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+echo 10000 > /sys/class/pwm/pwmchip0/pwm1/period
+echo 5000 > /sys/class/pwm/pwmchip0/pwm1/duty_cycle
+echo 10000 > /sys/class/pwm/pwmchip2/pwm0/period
+echo 5000 > /sys/class/pwm/pwmchip2/pwm0/duty_cycle
+echo 10000 > /sys/class/pwm/pwmchip2/pwm1/period
+echo 5000 > /sys/class/pwm/pwmchip2/pwm1/duty_cycle
 
 #SPI
-echo BB-SPIDEV1 > /sys/devices/bone_capemgr.9/slots
+echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
 
 #I2C
-echo BB-I2C1 > /sys/devices/bone_capemgr.9/slots
+echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
