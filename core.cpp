@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
     el::Loggers::removeFlag(el::LoggingFlag::AllowVerboseIfModuleNotSpecified);
 
     PowerRail *motorRail = PowerManager::getRail(RAIL12V0);
-    const DRV8842Motor driveAMotor = DRV8842Motor(3, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125);
-    const DRV8842Motor driveBMotor = DRV8842Motor(5, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125);
-    const DRV8842Motor treatMotor = DRV8842Motor(6, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125);
-    const DRV8843Motor cameraMotor = DRV8843Motor(6, 76, 4, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250);
+    const DRV8842Motor driveAMotor = DRV8842Motor(0, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125);
+    const DRV8842Motor driveBMotor = DRV8842Motor(2, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125);
+    const DRV8842Motor treatMotor = DRV8842Motor(3, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125);
+    const DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250);
 
 
     return 0;
