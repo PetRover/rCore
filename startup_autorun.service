@@ -1,0 +1,8 @@
+[Unit]
+Description=startup script
+
+[Service]
+ExecStart=/home/debian/rover/startup.sh
+
+[Install]
+WantedBy=multi-user.target 
