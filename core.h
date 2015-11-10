@@ -6,5 +6,6 @@
 #define FIRMWARE_CORE_H
 
 #include "rMotors.h"
+#include "rWifi.h"
 
 #endif //FIRMWARE_CORE_H
