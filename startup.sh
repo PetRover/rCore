@@ -144,12 +144,18 @@ echo 20 > /sys/class/gpio/export
 #P9_42
 echo 7 > /sys/class/gpio/export
 
+#SPI
+echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
+
+#I2C
+echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
+
 #PWM
 echo BB-PWM1A > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM1B > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM2A > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM2B > /sys/devices/platform/bone_capemgr/slots
-sleep 0.5
+sleep 3
 
 echo 0 > /sys/class/pwm/pwmchip0/export #8_36
 echo 1 > /sys/class/pwm/pwmchip0/export #8_19
@@ -165,9 +171,3 @@ echo 10000 > /sys/class/pwm/pwmchip2/pwm0/period
 echo 5000 > /sys/class/pwm/pwmchip2/pwm0/duty_cycle
 echo 10000 > /sys/class/pwm/pwmchip2/pwm1/period
 echo 5000 > /sys/class/pwm/pwmchip2/pwm1/duty_cycle
-
-#SPI
-echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
-
-#I2C
-echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
