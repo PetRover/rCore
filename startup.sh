@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Analog Input Pins (enables all AIN pins)
-#echo cape-bone-iio > /sys/devices/platform/bone_capemgr/slots
+echo BB-ADC > /sys/devices/platform/bone_capemgr/slots
 
 #GPIO pins
 echo rover_board_rev1 > /sys/devices/platform/bone_capemgr/slots
@@ -145,7 +145,7 @@ echo 20 > /sys/class/gpio/export
 echo 7 > /sys/class/gpio/export
 
 #SPI
-echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
+#echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
 
 #I2C
 echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
@@ -155,7 +155,7 @@ echo BB-PWM1A > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM1B > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM2A > /sys/devices/platform/bone_capemgr/slots
 echo BB-PWM2B > /sys/devices/platform/bone_capemgr/slots
-sleep 3
+sleep 5
 
 echo 0 > /sys/class/pwm/pwmchip0/export #8_36
 echo 1 > /sys/class/pwm/pwmchip0/export #8_19
