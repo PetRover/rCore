@@ -152,12 +152,12 @@ echo 7 > /sys/class/gpio/export
 #echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
 
 #PWM
-sleep 5
+sleep 7 #delay necessary for successful export
+echo 0 > /sys/class/pwm/pwmchip0/export #9_16
+echo 1 > /sys/class/pwm/pwmchip0/export #8_46
+echo 0 > /sys/class/pwm/pwmchip2/export #8_36
+echo 1 > /sys/class/pwm/pwmchip2/export #8_19
 
-echo 0 > /sys/class/pwm/pwmchip0/export #8_36
-echo 1 > /sys/class/pwm/pwmchip0/export #8_19
-echo 0 > /sys/class/pwm/pwmchip2/export #9_16
-echo 1 > /sys/class/pwm/pwmchip2/export #8_46
 
 # DEFAULT PWM FREQUENCY = 100kHz (AND 50% Duty Cycle)
 echo 10000 > /sys/class/pwm/pwmchip0/pwm0/period

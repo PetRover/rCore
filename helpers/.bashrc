@@ -116,4 +116,6 @@ alias rov='cd /home/debian/rover/'
 alias pwm='cd /sys/class/pwm/'
 alias gpio='cd /sys/class/gpio/'
 alias ovr='cd /sys/kernel/config/device-tree/overlays/'
-
+alias home='cd /home/debian'
+alias pwm0='cd /sys/class/pwm/pwmchip0'
+alias pwm2='cd /sys/class/pwm/pwmchip2'
