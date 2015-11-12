@@ -1,10 +1,11 @@
 #!/bin/bash
 
 #Analog Input Pins (enables all AIN pins)
-echo BB-ADC > /sys/devices/platform/bone_capemgr/slots
+#echo BB-ADC > /sys/devices/platform/bone_capemgr/slots
 
 #GPIO pins
-echo rover_board_rev1 > /sys/devices/platform/bone_capemgr/slots
+mkdir /sys/kernel/config/device-tree/overlays/rover_board_rev1
+cat /lib/firmware/rover_board_rev1-00A0.dtbo > /sys/kernel/config/device-tree/overlays/rover_board_rev1/dtbo
 
 #P8_8
 echo 67 > /sys/class/gpio/export
@@ -148,13 +149,9 @@ echo 7 > /sys/class/gpio/export
 #echo BB-SPIDEV1 > /sys/devices/platform/bone_capemgr/slots
 
 #I2C
-echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
+#echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
 
 #PWM
-echo BB-PWM1A > /sys/devices/platform/bone_capemgr/slots
-echo BB-PWM1B > /sys/devices/platform/bone_capemgr/slots
-echo BB-PWM2A > /sys/devices/platform/bone_capemgr/slots
-echo BB-PWM2B > /sys/devices/platform/bone_capemgr/slots
 sleep 5
 
 echo 0 > /sys/class/pwm/pwmchip0/export #8_36
