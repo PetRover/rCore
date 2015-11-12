@@ -152,12 +152,34 @@ echo 7 > /sys/class/gpio/export
 #echo BB-I2C1 > /sys/devices/platform/bone_capemgr/slots
 
 #PWM
-sleep 7 #delay necessary for successful export
-echo 0 > /sys/class/pwm/pwmchip0/export #9_16
-echo 1 > /sys/class/pwm/pwmchip0/export #8_46
-echo 0 > /sys/class/pwm/pwmchip2/export #8_36
-echo 1 > /sys/class/pwm/pwmchip2/export #8_19
+#to ensure PWMs are exported (occassional issues), each is tried until it exports (up to 300 times)
+for i in {1..100000}
+do
+    echo "Trying for the $i time to export pwmchip0/pwm0"
+    echo 0 > /sys/class/pwm/pwmchip0/export #9_16
+    [ -a /sys/class/pwm/pwmchip0/pwm0 ] && echo "pwmchip0/pwm0 is exported" && break
+done
 
+for i in {1..100000}
+do
+    echo "Trying for the $i time to export pwmchip0/pwm1"
+    echo 1 > /sys/class/pwm/pwmchip0/export #8_46
+    [ -a /sys/class/pwm/pwmchip0/pwm1 ] && echo "pwmchip0/pwm1 is exported" && break
+done
+
+for i in {1..100000}
+do
+    echo "Trying for the $i time to export pwmchip2/pwm0"
+    echo 0 > /sys/class/pwm/pwmchip2/export #8_36
+    [ -a /sys/class/pwm/pwmchip2/pwm0 ] && echo "pwmchip2/pwm0 is exported" && break
+done
+
+for i in {1..100000}
+do
+    echo "Trying for the $i time to export pwmchip2/pwm1"
+    echo 1 > /sys/class/pwm/pwmchip2/export #8_19
+    [ -a /sys/class/pwm/pwmchip2/pwm1 ] && echo "pwmchip2/pwm1 is exported" && break
+done
 
 # DEFAULT PWM FREQUENCY = 100kHz (AND 50% Duty Cycle)
 echo 10000 > /sys/class/pwm/pwmchip0/pwm0/period
