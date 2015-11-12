@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.3)
 
 project(rCore)
 SET(EXECUTABLE_OUTPUT_PATH ../bin)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++ -lm")
 SET(CMAKE_VERBOSE_MAKEFILE OFF)
 
 IF (NOT DEFINED CROSS_COMPILE)

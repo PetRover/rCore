@@ -24,16 +24,31 @@ int main(int argc, char *argv[])
 // Motors setup
 // ==============================================================
     PowerRail *motorRail = PowerManager::getRail(RAIL12V0);
-    const DRV8842Motor driveAMotor = DRV8842Motor(0, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125);
-    const DRV8842Motor driveBMotor = DRV8842Motor(2, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125);
-    const DRV8842Motor treatMotor = DRV8842Motor(3, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125);
-    const DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250);
+    DRV8842Motor driveAMotor = DRV8842Motor(0, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125, "DRIVE_A");
+    DRV8842Motor driveBMotor = DRV8842Motor(2, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125, "DRIVE_B");
+    DRV8842Motor treatMotor = DRV8842Motor(3, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125, "TREAT");
+    DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250, "CAMERA");
+
+    GpioPin r12vGpio = GpioPin(14, GpioDirection::OUT);
+    r12vGpio.setValue(GpioValue::HIGH);
+    driveAMotor.setRampTime(100);
+    driveBMotor.setRampTime(100);
+    treatMotor.setRampTime(100);
+
+    driveAMotor.setCurrentLimit(1000);
+    driveBMotor.setCurrentLimit(1000);
+    treatMotor.setCurrentLimit(1000);
+
+    driveAMotor.wake();
+    driveBMotor.wake();
+    treatMotor.wake();
+
 
 // ==============================================================
 // Wifi setup
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
-    netMan->initializeNewConnection("COMMANDS", "192.168.7.1", 1024, ConnectionInitType::CONNECT);
+    netMan->initializeNewConnection("COMMANDS", "192.168.1.2", 1024, ConnectionInitType::CONNECT);
     bool stop = false;
 
 // ==============================================================
@@ -51,24 +66,42 @@ int main(int argc, char *argv[])
                     switch (cmd.getCommandType())
                     {
                         case CommandType::DRIVE_FORWARD:
+                            driveAMotor.stopMotor();
+                            driveBMotor.stopMotor();
                             VLOG(1) << "Got a drive forwards command... driving forwards";
-                            stop = true;
+                            driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                            driveBMotor.startMotor(100, MotorDirection::FORWARD);
+//                            stop = true;
                             break;
                         case CommandType::DRIVE_BACKWARD:
+                            driveAMotor.stopMotor();
+                            driveBMotor.stopMotor();
                             VLOG(1) << "Got a drive backwards command... driving backward";
-                            stop = true;
+                            driveAMotor.startMotor(100, MotorDirection::REVERSE);
+                            driveBMotor.startMotor(100, MotorDirection::REVERSE);
+//                            stop = true;
                             break;
                         case CommandType::TURN_LEFT:
+                            driveAMotor.stopMotor();
+                            driveBMotor.stopMotor();
                             VLOG(1) << "Got a turning left command... turning left";
-                            stop = true;
+                            driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                            driveBMotor.startMotor(75, MotorDirection::FORWARD);
+//                            stop = true;
                             break;
                         case CommandType::TURN_RIGHT:
+                            driveAMotor.stopMotor();
+                            driveBMotor.stopMotor();
                             VLOG(1) << "Got a turning right command... turning right";
-                            stop = true;
+//                            driveAMotor.startMotor(90, MotorDirection::REVERSE);
+                            driveBMotor.startMotor(100, MotorDirection::FORWARD);
+//                            stop = true;
                             break;
                         case CommandType::STOP_DRIVE:
                             VLOG(1) << "Got a stop command... stopping";
-                            stop = true;
+                            driveAMotor.stopMotor();
+                            driveBMotor.stopMotor();
+//                            stop = true;
                             break;
                     }
                 }
@@ -103,7 +136,7 @@ int main(int argc, char *argv[])
                 // Not yet implemented
                 break;
         }
-        usleep(10000000);
+        usleep(100000);
     }
 
 

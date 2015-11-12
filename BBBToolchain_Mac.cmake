@@ -5,14 +5,18 @@ SET(CMAKE_SYSTEM_VERSION 1)
 SET(CROSS_COMPILE TRUE)
 
 # specify the cross compiler
-SET(CMAKE_C_COMPILER /usr/local/carlson-minot/crosscompilers/bin/arm-none-linux-gnueabi-gcc)
-SET(CMAKE_CXX_COMPILER /usr/local/carlson-minot/crosscompilers/bin/arm-none-linux-gnueabi-gcc)
+include(CMakeForceCompiler)
+SET(CMAKE_C_COMPILER /usr/local/linaro/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc)
+SET(CMAKE_CXX_COMPILER /usr/local/linaro/arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc)
 
+
+SET(CMAKE_C_FLAGS "-marm -O0 -g -I." CACHE STRING "Toolchain")
+SET(CMAKE_CXX_FLAGS "-marm -O0 -g -I." CACHE STRING "Toolchain")
 # where is the target environment
-SET(CMAKE_FIND_ROOT_PATH  /usr/local/carlson-minot/crosscompilers/arm-none-linux-gnueabi/libc-2014.05-29-sysroot)
+#SET(CMAKE_SYSROOT /usr/local/linaro/arm-linux-gnueabihf/arm-linux-gnueabihf/libc)
+#LINK_DIRECTORIES(/usr/local/linaro/arm-linux-gnueabihf/arm-linux-gnueabihf/libc/usr/lib/arm-linux-gnueabihf)
 
-# search for programs in the build host directories
-SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-# for libraries and headers in the target directories
-SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)

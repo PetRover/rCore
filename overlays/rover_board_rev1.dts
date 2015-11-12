@@ -9,211 +9,6 @@
 /plugin/;
 
 / { compatible = "ti,beaglebone", "ti,beaglebone-black";
-    /* identification */
-    part-number = "rover_board_rev1";
-    
-    exclusive-use =        /* MOTOR SHARED PINS */
-                "P8.11", /*Drive Sleep */
-                "P8.26", /* Drive Reset*/
-                "P8.39", /* Treat Motor IN2/Camera Motor AIN2*/
-                "P8.40", /* Motor Decay */
-                "P8.42", /* Treat Motor I1/Camera Motor AI0 */
-                "P8.43", /* Treat Motor I2/Camera Motor AI1 */
-                "P8.44", /* Treat Motor I3/Camera Motor BI0 */
-                "P8.45", /* Treat Motor I4/Camera Motor BI1 */
-                /* NOT GPIO "P8.46",  Treat Motor IN1/Camera Motor AIN1 */
-
-        /* DRIVE MOTOR A */
-                /* NOT GPIO "P8.36",  Drive A IN 1 */
-                "P8.27", /* Drive A IN 2 */
-                "P8.28", /* Drive A I0 */
-                "P8.30", /* Drive A I1 */
-                "P8.29", /* Drive A I2 */
-                "P8.31", /* Drive A I3 */
-                "P8.34", /* Drive A I4 */
-                /*"P8.25", NOTE REMOVED DUE TO CONFLICT WITH EMMC  Drive A FAULT */
-                /* SHARED  Drive A Sleep */
-                /* SHARED  Drive A Reset */
-                /* SHARED  Drive A Decay */
-        /* DRIVE MOTOR B */
-                /* NOT GPIO "P8.19",  Drive B IN1 */
-                "P8.16", /* Drive B IN2 */
-                "P8.12", /* Drive B I0 */
-                "P8.13", /* Drive B I2 */
-                "P8.14", /* Drive B I1 */
-                "P8.15", /* Drive B I3 */
-                "P8.17", /* Drive B I4 */
-                "P8.9", /* Drive B Fault */
-                /* SHARED  Drive B Sleep */
-                /* SHARED  Drive B Reset */
-                /* SHARED  Drive B Decay */
-
-        /* DRIVE MOTOR TREAT */
-                /* SHARED NOT GPIO Treat Motor IN1 */
-                /* SHARED Treat Motor IN2 */
-                "P8.41", /* Treat Motor I0 */
-                /* SHARED Treat Motor I1 */
-                /* SHARED Treat Motor I2 */
-                /* SHARED Treat Motor I3 */
-                /* SHARED Treat Motor I4 */
-                "P8.35", /* Treat Motor Reset */
-                "P8.37", /* Treat Motor Fault */
-                "P8.38", /* Treat Motor Sleep */
-                /* SHARED  Treat Motor  Decay */
-
-        /* CAM MOTOR */
-                /* NOT GPIO "P9.16",  Camera Motor B IN 1 */
-                "P9.11", /* Camera Motor B IN 2 */
-                /* SHARED  Camera A IN 1  */
-                /* SHARED  Camera A IN 2 */
-                /* SHARED  Camera A I0 */
-                /* SHARED  Camera A I1 */
-                /* SHARED  Camera B I0 */
-                /* SHARED  Camera B I1  */
-                "P8.8", /* Camera Motor Fault */
-                "P8.10", /* Camera Motor Sleep */
-                "P9.13", /* Camera Motor Reset */
-
-        /* WIFI */
-                "P9.12", /* Wifi HIB */
-                "P9.15", /* Wifi Reset */
-                /* NOT GPIO "P9.28",  Wifi SPI CS */
-                /* NOT GPIO "P9.29",  Wifi SPI MISO */
-                /* NOT GPIO "P9.30",  Wifi SPI MOSI */
-                /* NOT GPIO "P9.31",  Wifi SPI CLK */
-                "P9.41", /* Wifi Host Interrupt  */
-
-        /* 3V3 REGULATOR */
-                "P9.24", /* 3V3 SW EN */
-                "P9.25", /* 3V3 SW EN2 */
-                "P9.27", /* 3V3 REG EN */
-
-        /* 12V REGULATOR */
-                "P9.26", /* 12V REG EN */
-
-        /* FUEL GAUGE */
-                /* NOT GPIO FUEL SCL */
-                /* NOT GPIO FUEL SDA */
-                /* ERROR - NOT GPIO"P9.32",  FUEL ALCC */
-
-        /* SENSORS */
-                "P9.14", /* Cam Limit Switch 1 */
-                /* "P9.19", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2  Cam Limit Switch 2 */
-                /*"P9.20", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2 Treat Position Sensor 1 */
-                "P9.21", /* Treat Position Sensor 2 */
-                "P9.22", /* Treat Position Sensor 3 */
-                "P9.23", /*  Charger Connected Detection */
-
-                /* NOT GPIO "P9.40",   Treat count ADC 1 */
-                /* NOT GPIO "P9.39",   Treat count ADC 2 */
-                /* NOT GPIO "P9.38",   Treat count ADC 3 */
-                /* NOT GPIO "P9.37",   Treat count ADC 4 */
-                /* NOT GPIO "P9.42",   Extra ADC */
-
-        /* ======================================= */
-        /* HARDWARE NAME */
-        /* ======================================= */
-
-        /* MOTOR SHARED PINS */
-                "gpio1_13", /*Drive Sleep  */
-                "gpio1_29", /* Drive Reset */
-                "gpio2_12", /* Treat Motor IN2/Camera Motor AIN2 */
-                "gpio2_13", /* Motor Decay */
-                "gpio2_11", /* Treat Motor I1/Camera Motor AI0 */
-                "gpio2_8", /* Treat Motor I2/Camera Motor AI1 */
-                "gpio2_9", /* Treat Motor I3/Camera Motor BI0 */
-                "gpio2_6", /* Treat Motor I4/Camera Motor BI1 */
-                /* NOT GPIO "P8.46",  Treat Motor IN1/Camera Motor AIN1 */
-
-        /* DRIVE MOTOR A */
-                /* NOT GPIO "P8.36",  Drive A IN 1 */
-                "gpio2_22", /* Drive A IN 2 */
-                "gpio2_24", /* Drive A I0 */
-                "gpio2_25", /* Drive A I1 */
-                "gpio2_23", /* Drive A I2 */
-                "gpio0_10", /* Drive A I3 */
-                "gpio2_17", /* Drive A I4 */
-                "gpio1_0", /* Drive A FAULT */
-                /* SHARED  Drive A Sleep */
-                /* SHARED  Drive A Reset */
-                /* SHARED  Drive A Decay */
-                
-        /* DRIVE MOTOR B */
-                /* NOT GPIO "P8.19", Drive B IN1 */
-                "gpio1_14", /* Drive B IN2 */
-                "gpio1_12", /* Drive B I0 */
-                "gpio0_23", /* Drive B I2 */
-                "gpio0_26", /* Drive B I1 */
-                "gpio1_15", /* Drive B I3 */
-                "gpio0_27", /* Drive B I4 */
-                "gpio2_5", /* Drive B Fault */
-                /* SHARED  Drive B Sleep */
-                /* SHARED  Drive B Reset */
-                /* SHARED  Drive B Decay */
-
-        /* DRIVE MOTOR TREAT */
-                /* SHARED NOT GPIO Treat Motor IN1 */
-                /* SHARED Treat Motor IN2 */
-                "gpio2_10", /* Treat Motor I0 */
-                /* SHARED Treat Motor I1 */
-                /* SHARED Treat Motor I2 */
-                /* SHARED Treat Motor I3 */
-                /* SHARED Treat Motor I4 */
-                "gpio0_8", /* Treat Motor Reset */
-                "gpio2_14", /* Treat Motor Fault */
-                "gpio2_15", /* Treat Motor Sleep */
-                /* SHARED  Treat Motor  Decay */
-
-        /* CAM MOTOR */
-                /* NOT GPIO "P9.16",  Camera Motor B IN 1 */
-                "gpio0_30", /* Camera Motor B IN 2 */
-                /* SHARED  Camera A IN 1  */
-                /* SHARED  Camera A IN 2 */
-                /* SHARED  Camera A I0 */
-                /* SHARED  Camera A I1 */
-                /* SHARED  Camera B I0 */
-                /* SHARED  Camera B I1  */
-                "gpio2_3", /* Camera Motor Fault */
-                "gpio2_4", /* Camera Motor Sleep */
-                "gpio0_31", /* Camera Motor Reset */
-
-        /* WIFI */
-                "gpio1_28", /* Wifi HIB */
-                "gpio1_16", /* Wifi Reset */
-                /* NOT GPIO "P9.28",  Wifi SPI CS */
-                /* NOT GPIO "P9.29",  Wifi SPI MISO */
-                /* NOT GPIO "P9.30",  Wifi SPI MOSI */
-                /* NOT GPIO "P9.31",  Wifi SPI CLK */
-                "gpio0_20", /* Wifi Host Interrupt  */
-
-        /* 3V3 REGULATOR */
-                "gpio0_15", /* 3V3 SW EN */
-                "gpio3_21", /* 3V3 SW EN2 */
-                "gpio3_19", /* 3V3 REG EN */
-
-        /* 12V REGULATOR */
-                "gpio0_14", /* 12V REG EN */
-
-        /* FUEL GAUGE */
-                /* NOT GPIO FUEL SCL */
-                /* NOT GPIO FUEL SDA */
-                /* ERROR - NOT GPIO"P9.32",  FUEL ALCC */
-
-        /* SENSORS */
-                "gpio1_18", /* Cam Limit Switch 1 */
-                /* "gpio0_13", NOTE COMMENTED OUT BECAUSE OF CONFLICT WITH I2C2 Cam Limit Switch 2 */
-                /* "gpio0_12", NOTE COMMENTED OUT BECAUSE OF CONFLICT WIHT I2C2 Treat Position Sensor 1 */
-                "gpio0_3", /* Treat Position Sensor 2 */
-                "gpio0_2", /* Treat Position Sensor 3 */
-                "gpio1_17" /*  Charger Connected Detection */
-
-                /* NOT GPIO "P9.40",   Treat count ADC 1 */
-                /* NOT GPIO "P9.39",   Treat count ADC 2 */
-                /* NOT GPIO "P9.38",   Treat count ADC 3 */
-                /* NOT GPIO "P9.37",   Treat count ADC 4 */
-                /* NOT GPIO "P9.42",   Extra ADC */
-        ;
-    
     fragment@0 {
         target = <&am33xx_pinmux>;
         __overlay__ {
@@ -228,23 +23,23 @@
                         0x0a8 0x0f /* Treat Motor I2/Camera Motor AI1 */
                         0x0ac 0x0f /* Treat Motor I3/Camera Motor BI0 */
                         0x0a0 0x0f /* Treat Motor I4/Camera Motor BI1 */
-                        /*NOT GPIO “P8.46”, // Treat Motor IN1/Camera Motor AIN1 */
+                        0x0a4 0x13 /* P8_46 MODE4 ehrpwm2B PWM */ /*NOT GPIO “P8.46”, // Treat Motor IN1/Camera Motor AIN1 */
 
                 /* DRIVE MOTOR A */
-                        /* NOT GPIO "P8.36", // Drive A IN 1 */
+                        0x0c8 0x02 /* P8_36 MODE4 ehrpwm1A PWM *//* NOT GPIO "P8.36", // Drive A IN 1 */
                         0x0e0 0x0f /* Drive A IN 2 */
                         0x0e8 0x0f /* Drive A I0 */
                         0x0ec 0x0f /* Drive A I1 */
                         0x0e4 0x0f /* Drive A I2 */
                         0x0d8 0x0f /* Drive A I3 */
                         0x0cc 0x0f /* Drive A I4 */
-                        0x000 0x37 /* Drive A Fault */
+                        /*0x000 0x37 NOTE COMMENTING OUT DUE TO CONFLICT*/ /* Drive A Fault */
                         /* SHARED  Drive A Sleep */
                         /* SHARED  Drive A Reset */
                         /* SHARED  Drive A Decay */
                         
                 /* DRIVE MOTOR B */
-                        /*NOT GPIO “P8.19”, //Drive B IN1 */
+                        0x020 0x14 /* P8_46 MODE4 ehrpwm2A PWM */ /*NOT GPIO “P8.19”, //Drive B IN1 */
                         0x038 0x0f /* Drive B IN2 */
                         0x030 0x0f /* Drive B I0 */
                         0x024 0x0f /* Drive B I2 */
@@ -270,7 +65,7 @@
                         /* SHARED  Treat Motor  Decay */
 
                 /* CAM MOTOR */
-                        /* NOT GPIO "P9.16", // Camera Motor B IN 1 */
+                        0x04c 0x16 /* P9_16 MODE4 ehrpwm1B PWM */ /* NOT GPIO "P9.16", // Camera Motor B IN 1 */
                         0x070 0x0f /* Camera Motor B IN 2 */
                         /* SHARED  Camera A IN 1  */
                         /* SHARED  Camera A IN 2 */
@@ -289,7 +84,7 @@
                         /* NOT GPIO "P9.29", // Wifi SPI MISO */
                         /* NOT GPIO "P9.30", // Wifi SPI MOSI */
                         /* NOT GPIO "P9.31", // Wifi SPI CLK */
-                        0x1b4 0x0f /* Wifi Host Interrupt  */
+                        /*0x1b4 0x0f NOTE COMMENTED OUT DUE TO CONFLICT*/ /* Wifi Host Interrupt  */
 
                 /* 3V3 REGULATOR */
                         0x184 0x07 /* 3V3 SW EN */
@@ -323,6 +118,34 @@
     };
 
     fragment@1 {
+    target = <&ehrpwm1>;
+    __overlay__ {
+    status = "okay";
+    };
+    };
+
+    fragment@2 {
+    target = <&epwmss2>;
+    __overlay__ {
+    status = "okay";
+    };
+    };
+
+    fragment@3 {
+    target = <&ehrpwm2>;
+    __overlay__ {
+    status = "okay";
+    };
+    };
+
+    fragment@4 {
+    target = <&epwmss1>;
+    __overlay__ {
+    status = "okay";
+    };
+    };
+
+    fragment@5 {
         target = <&ocp>;
         __overlay__ {
             test_helper: helper {
