@@ -6,6 +6,8 @@
 #define FIRMWARE_CORE_H
 
 #include "rMotors.h"
+#include "rCamera.h"
+#include <libuvc/libuvc.h>
 #include "rWifi.h"
 
 #endif //FIRMWARE_CORE_H

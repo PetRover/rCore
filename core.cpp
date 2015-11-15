@@ -49,12 +49,28 @@ int main(int argc, char *argv[])
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
     netMan->initializeNewConnection("COMMANDS", "192.168.1.2", 1024, ConnectionInitType::CONNECT);
-    bool stop = false;
+    netMan->initializeNewConnection("CAMERA", "192.168.1.2", 1025, ConnectionInitType::CONNECT);
+
+// ==============================================================
+// Camera setup
+// ==============================================================
+
+    Camera camera = Camera(netMan);
+
+    VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
+    camera.setupStream(UVC_FRAME_FORMAT_MJPEG, 640, 480, 30);
+    VLOG(2) << "Setting callback function to saveFrame()";
+    camera.setFrameCallback(sendFrame);
+
+    camera.setAutoExposure(true);
+    camera.startStream();
+    camera.stopStream();
 
 // ==============================================================
 // Receive/Execute command loop
 // ==============================================================
     NetworkChunk* nc = new NetworkChunk;
+    bool stop = false;
     while (!stop)
     {
         *nc = netMan->getData("COMMANDS");
