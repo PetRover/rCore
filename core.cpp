@@ -30,6 +30,10 @@ int main(int argc, char *argv[])
     DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250, "CAMERA");
 
     GpioPin r12vGpio = GpioPin(14, GpioDirection::OUT);
+    GpioPin tpos1GPIO = GpioPin(12, GpioDirection::IN);
+    GpioPin tpos2GPIO = GpioPin(3, GpioDirection::IN);
+    GpioPin tpos3GPIO = GpioPin(2, GpioDirection::IN);
+
     r12vGpio.setValue(GpioValue::HIGH);
     driveAMotor.setRampTime(100);
     driveBMotor.setRampTime(100);
@@ -48,29 +52,17 @@ int main(int argc, char *argv[])
 // Wifi setup
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
-    netMan->initializeNewConnection("COMMANDS", "192.168.1.2", 1024, ConnectionInitType::CONNECT);
-    netMan->initializeNewConnection("CAMERA", "192.168.1.2", 1025, ConnectionInitType::CONNECT);
 
-// ==============================================================
-// Camera setup
-// ==============================================================
+//    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
 
-    Camera camera = Camera(netMan);
 
-    VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
-    camera.setupStream(UVC_FRAME_FORMAT_MJPEG, 640, 480, 30);
-    VLOG(2) << "Setting callback function to saveFrame()";
-    camera.setFrameCallback(sendFrame);
-
-    camera.setAutoExposure(true);
-    camera.startStream();
-    camera.stopStream();
+    bool stop = false;
 
 // ==============================================================
 // Receive/Execute command loop
 // ==============================================================
     NetworkChunk* nc = new NetworkChunk;
-    bool stop = false;
     while (!stop)
     {
         *nc = netMan->getData("COMMANDS");
@@ -119,12 +111,26 @@ int main(int argc, char *argv[])
                             driveBMotor.stopMotor();
 //                            stop = true;
                             break;
+                        case CommandType::DISPENSE_TREAT:
+                            VLOG(1) << "Got a dispense treat command... dispensing treat";
+                            std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
+                            treatMotor.startMotor(100, MotorDirection::FORWARD);
+//                            while((tpos1GPIO.getValue() != GpioValue::HIGH) & ((std::chrono::high_resolution_clock::now() - rotateStartTime) < 1000000));//TODO - implement in a clearer way
+
+                            treatMotor.stopMotor();
+
+
+                            treatMotor.startMotor(100, MotorDirection::REVERSE);
+                            while(tpos2GPIO.getValue() != GpioValue::HIGH);
+                            treatMotor.stopMotor();
+//                            stop = true;
+                            break;
                     }
                 }
                 break;
             case DataType::STATUS:
                 VLOG(2) << "Received a status chunk";
-                { //extra brackets needed for scoping
+                {
                     Status stat = Status(*nc);
                     switch (stat.getStatusType())
                     {
