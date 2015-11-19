@@ -62,105 +62,109 @@ int main(int argc, char *argv[])
 // ==============================================================
 // Receive/Execute command loop
 // ==============================================================
-    NetworkChunk* nc = new NetworkChunk;
+    NetworkChunk* nc = new NetworkChunk();
     while (!stop)
     {
-        *nc = netMan->getData("COMMANDS");
-        switch (nc->getDataType()){
-            case DataType::COMMAND:
-                VLOG(2) << "Received a command chunk";
-                {//extra brackets needed for scoping
-                    Command cmd = Command(*nc);
-                    switch (cmd.getCommandType())
+        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
+        {
+            switch (nc->getDataType())
+            {
+                case DataType::COMMAND:
+                    VLOG(2) << "Received a command chunk";
                     {
-                        case CommandType::DRIVE_FORWARD:
-                            driveAMotor.stopMotor();
-                            driveBMotor.stopMotor();
-                            VLOG(1) << "Got a drive forwards command... driving forwards";
-                            driveAMotor.startMotor(100, MotorDirection::FORWARD);
-                            driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                        Command cmd = Command(*nc);
+                        switch (cmd.getCommandType())
+                        {
+                            case CommandType::DRIVE_FORWARD:
+                                driveAMotor.stopMotor();
+                                driveBMotor.stopMotor();
+                                VLOG(1) << "Got a drive forwards command... driving forwards";
+                                driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                                driveBMotor.startMotor(100, MotorDirection::FORWARD);
 //                            stop = true;
-                            break;
-                        case CommandType::DRIVE_BACKWARD:
-                            driveAMotor.stopMotor();
-                            driveBMotor.stopMotor();
-                            VLOG(1) << "Got a drive backwards command... driving backward";
-                            driveAMotor.startMotor(100, MotorDirection::REVERSE);
-                            driveBMotor.startMotor(100, MotorDirection::REVERSE);
+                                break;
+                            case CommandType::DRIVE_BACKWARD:
+                                driveAMotor.stopMotor();
+                                driveBMotor.stopMotor();
+                                VLOG(1) << "Got a drive backwards command... driving backward";
+                                driveAMotor.startMotor(100, MotorDirection::REVERSE);
+                                driveBMotor.startMotor(100, MotorDirection::REVERSE);
 //                            stop = true;
-                            break;
-                        case CommandType::TURN_LEFT:
-                            driveAMotor.stopMotor();
-                            driveBMotor.stopMotor();
-                            VLOG(1) << "Got a turning left command... turning left";
-                            driveAMotor.startMotor(100, MotorDirection::FORWARD);
-                            driveBMotor.startMotor(75, MotorDirection::FORWARD);
+                                break;
+                            case CommandType::TURN_LEFT:
+                                driveAMotor.stopMotor();
+                                driveBMotor.stopMotor();
+                                VLOG(1) << "Got a turning left command... turning left";
+                                driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                                driveBMotor.startMotor(75, MotorDirection::FORWARD);
 //                            stop = true;
-                            break;
-                        case CommandType::TURN_RIGHT:
-                            driveAMotor.stopMotor();
-                            driveBMotor.stopMotor();
-                            VLOG(1) << "Got a turning right command... turning right";
+                                break;
+                            case CommandType::TURN_RIGHT:
+                                driveAMotor.stopMotor();
+                                driveBMotor.stopMotor();
+                                VLOG(1) << "Got a turning right command... turning right";
 //                            driveAMotor.startMotor(90, MotorDirection::REVERSE);
-                            driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                                driveBMotor.startMotor(100, MotorDirection::FORWARD);
 //                            stop = true;
-                            break;
-                        case CommandType::STOP_DRIVE:
-                            VLOG(1) << "Got a stop command... stopping";
-                            driveAMotor.stopMotor();
-                            driveBMotor.stopMotor();
+                                break;
+                            case CommandType::STOP_DRIVE:
+                                VLOG(1) << "Got a stop command... stopping";
+                                driveAMotor.stopMotor();
+                                driveBMotor.stopMotor();
 //                            stop = true;
-                            break;
-                        case CommandType::DISPENSE_TREAT:
-                            VLOG(1) << "Got a dispense treat command... dispensing treat";
-                            std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
-                            treatMotor.startMotor(100, MotorDirection::FORWARD);
+                                break;
+                            case CommandType::DISPENSE_TREAT:
+                                VLOG(1) << "Got a dispense treat command... dispensing treat";
+                                std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
+                                treatMotor.startMotor(100, MotorDirection::FORWARD);
 //                            while((tpos1GPIO.getValue() != GpioValue::HIGH) & ((std::chrono::high_resolution_clock::now() - rotateStartTime) < 1000000));//TODO - implement in a clearer way
 
-                            treatMotor.stopMotor();
+                                treatMotor.stopMotor();
 
 
-                            treatMotor.startMotor(100, MotorDirection::REVERSE);
-                            while(tpos2GPIO.getValue() != GpioValue::HIGH);
-                            treatMotor.stopMotor();
+                                treatMotor.startMotor(100, MotorDirection::REVERSE);
+                                while (tpos2GPIO.getValue() != GpioValue::HIGH);
+                                treatMotor.stopMotor();
 //                            stop = true;
-                            break;
-                    }
-                }
-                break;
-            case DataType::STATUS:
-                VLOG(2) << "Received a status chunk";
-                {
-                    Status stat = Status(*nc);
-                    switch (stat.getStatusType())
-                    {
-                        case StatusType::CHARGING:
-                            VLOG(1) << "Got a charging status";
-                            stop = true;
-                            break;
-                        case StatusType::NOT_CHARGING:
-                            VLOG(1) << "Got a not charging status";
-                            stop = true;
-                            break;
+                                break;
+                        }
                     }
                     break;
-                }
-            case DataType::CAMERA:
-                VLOG(2) << "Received a camera chunk";
-                // Not yet implemented
-                break;
-            case DataType::TEXT:
-                VLOG(2) << "Received a text chunk";
-                // Code
-                break;
-            case DataType::NONE:
-                VLOG(2) << "Received a chunk of type NONE";
-                // Not yet implemented
-                break;
+                case DataType::STATUS:
+                    VLOG(2) << "Received a status chunk";
+                    {
+                        Status stat = Status(*nc);
+                        switch (stat.getStatusType())
+                        {
+                            case StatusType::CHARGING:
+                                VLOG(1) << "Got a charging status";
+                                stop = true;
+                                break;
+                            case StatusType::NOT_CHARGING:
+                                VLOG(1) << "Got a not charging status";
+                                stop = true;
+                                break;
+                        }
+                        break;
+                    }
+                case DataType::CAMERA:
+                    VLOG(2) << "Received a camera chunk";
+                    // Not yet implemented
+                    break;
+                case DataType::TEXT:
+                    VLOG(2) << "Received a text chunk";
+                    // Code
+                    break;
+                case DataType::NONE:
+                    VLOG(2) << "Received a chunk of type NONE";
+                    // Not yet implemented
+                    break;
+            }
+            usleep(100000);
+        }else{
+            VLOG(2) << "getData function returned ReceiveType::NODATA";
         }
-        usleep(100000);
     }
-
 
     return 0;
 }
