@@ -9,5 +9,6 @@
 #include "rCamera.h"
 #include <libuvc/libuvc.h>
 #include "rWifi.h"
+#include <stdexcept>
 
 #endif //FIRMWARE_CORE_H

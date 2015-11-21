@@ -8,6 +8,7 @@ SET(CMAKE_VERBOSE_MAKEFILE OFF)
 IF (NOT DEFINED CROSS_COMPILE)
     SET(CROSS_COMPILE FALSE)
 endif()
+link_directories(/usr/lib/arm-linux-gnueabi)
 
 # Compiler-specific C++11 activation.
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")

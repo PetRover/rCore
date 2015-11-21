@@ -42,10 +42,12 @@ int main(int argc, char *argv[])
     driveAMotor.setCurrentLimit(1000);
     driveBMotor.setCurrentLimit(1000);
     treatMotor.setCurrentLimit(1000);
+    cameraMotor.setCurrentLimit(1000);
 
     driveAMotor.wake();
     driveBMotor.wake();
     treatMotor.wake();
+    cameraMotor.wake();
 
 
 // ==============================================================
@@ -54,7 +56,21 @@ int main(int argc, char *argv[])
     NetworkManager* netMan = new NetworkManager;
 
 //    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
-    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnection("COMMANDS", "192.168.1.5", "192.168.1.3", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnection("CAMERA", "192.168.1.5", "192.168.1.3", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+
+    Camera* camera = new Camera(netMan);
+    try
+    {
+        VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
+        camera->setupStream(UVC_FRAME_FORMAT_YUYV, 640, 480, 30);
+        camera->setFrameCallback(RVR::sendFrame);
+        camera->setAutoExposure(true);
+    }
+    catch (std::exception &exception)
+    {
+        LOG(WARNING) << "FAILED TO SET UP CAMERA: " << exception.what();
+    }
 
 
     bool stop = false;
@@ -114,18 +130,21 @@ int main(int argc, char *argv[])
 //                            stop = true;
                                 break;
                             case CommandType::DISPENSE_TREAT:
-                                VLOG(1) << "Got a dispense treat command... dispensing treat";
-                                std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
-                                treatMotor.startMotor(100, MotorDirection::FORWARD);
-//                            while((tpos1GPIO.getValue() != GpioValue::HIGH) & ((std::chrono::high_resolution_clock::now() - rotateStartTime) < 1000000));//TODO - implement in a clearer way
-
-                                treatMotor.stopMotor();
-
-
-                                treatMotor.startMotor(100, MotorDirection::REVERSE);
-                                while (tpos2GPIO.getValue() != GpioValue::HIGH);
-                                treatMotor.stopMotor();
-//                            stop = true;
+//                                VLOG(1) << "Got a dispense treat command... dispensing treat";
+//                                std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
+//                                treatMotor.startMotor(100, MotorDirection::FORWARD);
+////                            while((tpos1GPIO.getValue() != GpioValue::HIGH) & ((std::chrono::high_resolution_clock::now() - rotateStartTime) < 1000000));//TODO - implement in a clearer way
+//
+//                                treatMotor.stopMotor();
+//
+//
+//                                treatMotor.startMotor(100, MotorDirection::REVERSE);
+//                                while (tpos2GPIO.getValue() != GpioValue::HIGH);
+//                                treatMotor.stopMotor();
+////                            stop = true;
+                                break;
+                            case CommandType::START_STREAM:
+                                camera->startStream();
                                 break;
                         }
                     }
