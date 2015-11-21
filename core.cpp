@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     try
     {
         VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
-        camera->setupStream(UVC_FRAME_FORMAT_YUYV, 640, 480, 30);
+        camera->setupStream(V4L2_PIX_FMT_MJPEG, 800, 600, 30);
 //        camera->setFrameCallback(RVR::sendFrame);
         camera->setAutoExposure(true);
     }
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
         LOG(WARNING) << "FAILED TO SET UP CAMERA: " << exception.what();
     }
 
-
+    camera->startStream();
     bool stop = false;
 
 // ==============================================================
@@ -82,12 +82,14 @@ int main(int argc, char *argv[])
     NetworkChunk* nc = new NetworkChunk();
     while (!stop)
     {
+        VLOG(1) << "LOOOPED!!!!!!!!";
         sNc = camera->getFrameNC_BAD_TEMP_FUNC();
         if (sNc->getDataType() != DataType::NONE)
         {
             netMan->sendData("CAMERA", sNc);
         }
-        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
+        if (0)
+//        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
         {
             switch (nc->getDataType())
             {
