@@ -56,15 +56,15 @@ int main(int argc, char *argv[])
     NetworkManager* netMan = new NetworkManager;
 
 //    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
-    netMan->initializeNewConnection("COMMANDS", "192.168.1.5", "192.168.1.3", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnection("CAMERA", "192.168.1.5", "192.168.1.3", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnection("COMMANDS", "192.168.1.6", "192.168.1.3", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnection("CAMERA", "192.168.1.6", "192.168.1.3", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
     Camera* camera = new Camera(netMan);
     try
     {
         VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
         camera->setupStream(UVC_FRAME_FORMAT_YUYV, 640, 480, 30);
-        camera->setFrameCallback(RVR::sendFrame);
+//        camera->setFrameCallback(RVR::sendFrame);
         camera->setAutoExposure(true);
     }
     catch (std::exception &exception)
@@ -78,9 +78,15 @@ int main(int argc, char *argv[])
 // ==============================================================
 // Receive/Execute command loop
 // ==============================================================
+    NetworkChunk* sNc;
     NetworkChunk* nc = new NetworkChunk();
     while (!stop)
     {
+        sNc = camera->getFrameNC_BAD_TEMP_FUNC();
+        if (sNc->getDataType() != DataType::NONE)
+        {
+            netMan->sendData("CAMERA", sNc);
+        }
         if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
         {
             switch (nc->getDataType())
