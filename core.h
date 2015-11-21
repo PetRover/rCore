@@ -7,7 +7,7 @@
 
 #include "rMotors.h"
 #include "rCamera.h"
-#include <libuvc/libuvc.h>
+#include "linux/videodev2.h"
 #include "rWifi.h"
 #include <stdexcept>
 
