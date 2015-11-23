@@ -72,7 +72,6 @@ int main(int argc, char *argv[])
         LOG(WARNING) << "FAILED TO SET UP CAMERA: " << exception.what();
     }
 
-    camera->startStream();
     bool stop = false;
 
 // ==============================================================
@@ -88,8 +87,7 @@ int main(int argc, char *argv[])
         {
             netMan->sendData("CAMERA", sNc);
         }
-        if (0)
-//        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
+        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
         {
             switch (nc->getDataType())
             {
