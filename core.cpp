@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
         LOG(WARNING) << "FAILED TO SET UP CAMERA: " << exception.what();
     }
 #endif
+
     bool stop = false;
 
 // ==============================================================
