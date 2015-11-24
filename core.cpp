@@ -55,10 +55,10 @@ int main(int argc, char *argv[])
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
 
-//    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
-    netMan->initializeNewConnection("COMMANDS", "192.168.1.6", "192.168.1.3", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnection("CAMERA", "192.168.1.6", "192.168.1.3", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnection("CAMERA", "192.168.7.2", "192.168.7.1", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
+#ifdef USING_CAMERA
     Camera* camera = new Camera(netMan);
     try
     {
@@ -71,8 +71,7 @@ int main(int argc, char *argv[])
     {
         LOG(WARNING) << "FAILED TO SET UP CAMERA: " << exception.what();
     }
-
-    camera->startStream();
+#endif
     bool stop = false;
 
 // ==============================================================
@@ -82,14 +81,15 @@ int main(int argc, char *argv[])
     NetworkChunk* nc = new NetworkChunk();
     while (!stop)
     {
-        VLOG(1) << "LOOOPED!!!!!!!!";
+#ifdef USING_CAMERA
         sNc = camera->getFrameNC_BAD_TEMP_FUNC();
         if (sNc->getDataType() != DataType::NONE)
         {
             netMan->sendData("CAMERA", sNc);
+            stop = true;
         }
-        if (0)
-//        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
+#endif
+        if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
         {
             switch (nc->getDataType())
             {
@@ -152,7 +152,24 @@ int main(int argc, char *argv[])
 ////                            stop = true;
                                 break;
                             case CommandType::START_STREAM:
+                                VLOG(2) << "Got a start stream command... streaming";
+#ifdef USING_CAMERA
                                 camera->startStream();
+#else
+                                char* dataToSend = new char[500000];
+                                for (int i = 0; i < 5000; i++)
+                                {
+                                    for (int j = 0; j < 100; j++)
+                                    {
+                                        dataToSend[i * 100 + j] = i+1;
+                                    }
+                                }
+                                NetworkChunk* chunk = new NetworkChunk();
+                                chunk->setDataType(DataType::CAMERA);
+                                chunk->setData(dataToSend);
+                                chunk->setLength(500000);
+                                netMan->sendData("CAMERA", chunk);
+#endif
                                 break;
                         }
                     }
@@ -189,7 +206,7 @@ int main(int argc, char *argv[])
             }
             usleep(100000);
         }else{
-            VLOG(2) << "getData function returned ReceiveType::NODATA";
+            VLOG(3) << "getData function returned ReceiveType::NODATA";
         }
     }
 
