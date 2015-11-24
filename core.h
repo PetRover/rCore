@@ -11,6 +11,6 @@
 #include "rWifi.h"
 #include <stdexcept>
 
-//#define USING_CAMERA
+#define USING_CAMERA
 
 #endif //FIRMWARE_CORE_H

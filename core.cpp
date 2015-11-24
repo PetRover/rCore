@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
         if (sNc->getDataType() != DataType::NONE)
         {
             netMan->sendData("CAMERA", sNc);
-            stop = true;
+//            stop = true;
         }
 #endif
         if (netMan->getData("COMMANDS", nc) != ReceiveType::NODATA)
