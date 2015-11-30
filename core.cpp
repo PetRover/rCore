@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
                 case DataType::COMMAND:
                     VLOG(2) << "Received a command chunk";
                     {
-                        Command cmd = Command(*nc);
+                        Command cmd = Command(nc);
                         switch (cmd.getCommandType())
                         {
                             case CommandType::DRIVE_FORWARD:
@@ -205,11 +205,9 @@ int main(int argc, char *argv[])
                     // Not yet implemented
                     break;
             }
-            usleep(100000);
         }else{
             VLOG(3) << "getData function returned ReceiveType::NODATA";
         }
     }
-
     return 0;
 }
