@@ -10,6 +10,5 @@ make
 
 ip=${1-text}
 echo $ip
-scp ../bin/rCore debian@${ip}:/home/debian/rover
-scp ../bin/rTests debian@${ip}:/home/debian/rover
+scp ../bin/* debian@${ip}:/home/debian/rover
 cd ..

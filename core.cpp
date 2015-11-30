@@ -55,16 +55,15 @@ int main(int argc, char *argv[])
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
 
-    netMan->initializeNewConnection("COMMANDS", "192.168.7.2", "192.168.7.1", 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnection("CAMERA", "192.168.7.2", "192.168.7.1", 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnection("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnection("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
 #ifdef USING_CAMERA
     Camera* camera = new Camera(netMan);
     try
     {
         VLOG(2) << "Setting stream at YUYV, 640px by 480px @ 30fps";
-        camera->setupStream(V4L2_PIX_FMT_MJPEG, 800, 600, 30);
-//        camera->setFrameCallback(RVR::sendFrame);
+        camera->setupStream(V4L2_PIX_FMT_MJPEG, CAMERA_RES_WIDTH, CAMERA_RES_HEIGHT, 30);
         camera->setAutoExposure(true);
     }
     catch (std::exception &exception)
@@ -106,7 +105,6 @@ int main(int argc, char *argv[])
                                 VLOG(1) << "Got a drive forwards command... driving forwards";
                                 driveAMotor.startMotor(100, MotorDirection::FORWARD);
                                 driveBMotor.startMotor(100, MotorDirection::FORWARD);
-//                            stop = true;
                                 break;
                             case CommandType::DRIVE_BACKWARD:
                                 driveAMotor.stopMotor();
@@ -114,7 +112,6 @@ int main(int argc, char *argv[])
                                 VLOG(1) << "Got a drive backwards command... driving backward";
                                 driveAMotor.startMotor(100, MotorDirection::REVERSE);
                                 driveBMotor.startMotor(100, MotorDirection::REVERSE);
-//                            stop = true;
                                 break;
                             case CommandType::TURN_LEFT:
                                 driveAMotor.stopMotor();
@@ -128,29 +125,14 @@ int main(int argc, char *argv[])
                                 driveAMotor.stopMotor();
                                 driveBMotor.stopMotor();
                                 VLOG(1) << "Got a turning right command... turning right";
-//                            driveAMotor.startMotor(90, MotorDirection::REVERSE);
                                 driveBMotor.startMotor(100, MotorDirection::FORWARD);
-//                            stop = true;
                                 break;
                             case CommandType::STOP_DRIVE:
                                 VLOG(1) << "Got a stop command... stopping";
                                 driveAMotor.stopMotor();
                                 driveBMotor.stopMotor();
-//                            stop = true;
                                 break;
                             case CommandType::DISPENSE_TREAT:
-//                                VLOG(1) << "Got a dispense treat command... dispensing treat";
-//                                std::chrono::high_resolution_clock::time_point rotateStartTime = std::chrono::high_resolution_clock::now();
-//                                treatMotor.startMotor(100, MotorDirection::FORWARD);
-////                            while((tpos1GPIO.getValue() != GpioValue::HIGH) & ((std::chrono::high_resolution_clock::now() - rotateStartTime) < 1000000));//TODO - implement in a clearer way
-//
-//                                treatMotor.stopMotor();
-//
-//
-//                                treatMotor.startMotor(100, MotorDirection::REVERSE);
-//                                while (tpos2GPIO.getValue() != GpioValue::HIGH);
-//                                treatMotor.stopMotor();
-////                            stop = true;
                                 break;
                             case CommandType::START_STREAM:
                                 VLOG(2) << "Got a start stream command... streaming";

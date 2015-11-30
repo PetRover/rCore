@@ -41,8 +41,8 @@ include_directories("./../rWifi")
 add_subdirectory("./../rPowerSystems" "rPowerSystems")
 include_directories("./../rPowerSystems")
 
-add_subdirectory("./../rTests" "rTests")
-include_directories("./../rTests")
+#add_subdirectory("./../rTests" "rTests")
+#include_directories("./../rTests")
 
 add_executable(rCore core.cpp)
 
