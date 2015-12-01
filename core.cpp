@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 // Motors setup
 // ==============================================================
     PowerRail *motorRail = PowerManager::getRail(RAIL12V0);
-    DRV8842Motor driveAMotor = DRV8842Motor(0, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125, "DRIVE_A");
-    DRV8842Motor driveBMotor = DRV8842Motor(2, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125, "DRIVE_B");
+    DRV8842Motor driveAMotor = DRV8842Motor(2, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125, "DRIVE_A");
+    DRV8842Motor driveBMotor = DRV8842Motor(0, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125, "DRIVE_B");
     DRV8842Motor treatMotor = DRV8842Motor(3, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125, "TREAT");
     DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250, "CAMERA");
 
@@ -55,8 +55,8 @@ int main(int argc, char *argv[])
 // ==============================================================
     NetworkManager* netMan = new NetworkManager;
 
-    netMan->initializeNewConnection("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnection("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
 #ifdef USING_CAMERA
     Camera* camera = new Camera(netMan);
