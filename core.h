@@ -5,6 +5,7 @@
 #ifndef FIRMWARE_CORE_H
 #define FIRMWARE_CORE_H
 
+#include "util.h"
 #include "rMotors.h"
 #include "rCamera.h"
 #include "linux/videodev2.h"

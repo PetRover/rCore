@@ -81,6 +81,9 @@ int main(int argc, char *argv[])
     NetworkChunk* nc = new NetworkChunk();
     while (!stop)
     {
+        short cmdShortVal;
+        char* cmdValue;
+
 #ifdef USING_CAMERA
         sNc = camera->getFrameNC_BAD_TEMP_FUNC();
         if (sNc->getDataType() != DataType::NONE)
@@ -97,35 +100,64 @@ int main(int argc, char *argv[])
                     VLOG(2) << "Received a command chunk";
                     {
                         Command cmd = Command(nc);
+                        cmdValue = cmd.getCommandData();
+                        cmdShortVal = (cmdValue[2] << 8) | cmdValue[3];
+
+                        VLOG(2) << "The command data is (as a short): " << cmdShortVal;
+
                         switch (cmd.getCommandType())
                         {
                             case CommandType::DRIVE_FORWARD:
-                                driveAMotor.stopMotor();
-                                driveBMotor.stopMotor();
-                                VLOG(1) << "Got a drive forwards command... driving forwards";
-                                driveAMotor.startMotor(100, MotorDirection::FORWARD);
-                                driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                                if (cmdShortVal < 0)
+                                {
+                                    driveAMotor.stopMotor();
+                                    driveBMotor.stopMotor();
+                                }
+                                else
+                                {
+                                    VLOG(1) << "Got a drive forwards command... driving forwards";
+                                    driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                                    driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                                }
                                 break;
                             case CommandType::DRIVE_BACKWARD:
-                                driveAMotor.stopMotor();
-                                driveBMotor.stopMotor();
-                                VLOG(1) << "Got a drive backwards command... driving backward";
-                                driveAMotor.startMotor(100, MotorDirection::REVERSE);
-                                driveBMotor.startMotor(100, MotorDirection::REVERSE);
+                                if (cmdShortVal < 0)
+                                {
+                                    driveAMotor.stopMotor();
+                                    driveBMotor.stopMotor();
+                                }
+                                else
+                                {
+                                    VLOG(1) << "Got a drive backwards command... driving backwards";
+                                    driveAMotor.startMotor(100, MotorDirection::REVERSE);
+                                    driveBMotor.startMotor(100, MotorDirection::REVERSE);
+                                }
                                 break;
                             case CommandType::TURN_LEFT:
-                                driveAMotor.stopMotor();
-                                driveBMotor.stopMotor();
-                                VLOG(1) << "Got a turning left command... turning left";
-                                driveAMotor.startMotor(100, MotorDirection::FORWARD);
-                                driveBMotor.startMotor(75, MotorDirection::FORWARD);
-//                            stop = true;
+                                if (cmdShortVal < 0)
+                                {
+                                    driveAMotor.stopMotor();
+                                    driveBMotor.stopMotor();
+                                }
+                                else
+                                {
+                                    VLOG(1) << "Got a turn left command... turning left";
+                                    driveAMotor.startMotor(100, MotorDirection::FORWARD);
+                                    driveBMotor.startMotor(100, MotorDirection::REVERSE);
+                                }
                                 break;
                             case CommandType::TURN_RIGHT:
-                                driveAMotor.stopMotor();
-                                driveBMotor.stopMotor();
-                                VLOG(1) << "Got a turning right command... turning right";
-                                driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                                if (cmdShortVal < 0)
+                                {
+                                    driveAMotor.stopMotor();
+                                    driveBMotor.stopMotor();
+                                }
+                                else
+                                {
+                                    VLOG(1) << "Got a turn right command... turning right";
+                                    driveAMotor.startMotor(100, MotorDirection::REVERSE);
+                                    driveBMotor.startMotor(100, MotorDirection::FORWARD);
+                                }
                                 break;
                             case CommandType::STOP_DRIVE:
                                 VLOG(1) << "Got a stop command... stopping";
