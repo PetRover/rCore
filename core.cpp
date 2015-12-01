@@ -24,10 +24,11 @@ int main(int argc, char *argv[])
 // Motors setup
 // ==============================================================
     PowerRail *motorRail = PowerManager::getRail(RAIL12V0);
-    DRV8842Motor driveAMotor = DRV8842Motor(2, 86, 88, 89, 87, 10, 81, 32, 45, 61, 77, motorRail, 2500, 125, "DRIVE_A");
-    DRV8842Motor driveBMotor = DRV8842Motor(0, 46, 44, 26, 23, 47, 27, 69, 45, 61, 77, motorRail, 2500, 125, "DRIVE_B");
+    DRV8842Motor driveAMotor = DRV8842Motor(2, 86, 81, 81, 81, 81, 81, 32, 45, 61, 77, motorRail, 2500, 125, "DRIVE_A");
+    DRV8842Motor driveBMotor = DRV8842Motor(0, 46, 27, 27, 27, 27, 27, 69, 45, 61, 77, motorRail, 2500, 125, "DRIVE_B");
     DRV8842Motor treatMotor = DRV8842Motor(3, 76, 74, 75, 72, 73, 70, 78, 79, 8, 77, motorRail, 2500, 125, "TREAT");
-    DRV8843Motor cameraMotor = DRV8843Motor(3, 76, 1, 30, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250, "CAMERA");
+//    DRV8843Motor cameraMotor = DRV8843Motor(88, 89, 87, 10, 75, 72, 73, 70, 67, 68, 31, 77, motorRail, 1750, 250, "CAMERA");
+    GPIOStepperMotor cameraMotor = GPIOStepperMotor(44, 26, 23, 47, "CAMERA");
 
     GpioPin r12vGpio = GpioPin(14, GpioDirection::OUT);
     GpioPin tpos1GPIO = GpioPin(12, GpioDirection::IN);
@@ -42,12 +43,12 @@ int main(int argc, char *argv[])
     driveAMotor.setCurrentLimit(1000);
     driveBMotor.setCurrentLimit(1000);
     treatMotor.setCurrentLimit(1000);
-    cameraMotor.setCurrentLimit(1000);
+//    cameraMotor.setCurrentLimit(1000);
 
     driveAMotor.wake();
     driveBMotor.wake();
     treatMotor.wake();
-    cameraMotor.wake();
+//    cameraMotor.wake();
 
 
 // ==============================================================
@@ -165,6 +166,16 @@ int main(int argc, char *argv[])
                                 driveBMotor.stopMotor();
                                 break;
                             case CommandType::DISPENSE_TREAT:
+                                break;
+                            case CommandType::FLIP_CAMPERA:
+                                cameraMotor.enableMotor();
+                                for (int i=0;i<1000;i++)
+                                {
+                                    VLOG(1) << "Stepping Motor";
+                                    cameraMotor.step(MotorDirection::REVERSE);
+                                    usleep(10000);
+                                }
+                                cameraMotor.disableMotor();
                                 break;
                             case CommandType::START_STREAM:
                                 VLOG(2) << "Got a start stream command... streaming";
