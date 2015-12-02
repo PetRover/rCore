@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Analog Input Pins (enables all AIN pins)
-#echo BB-ADC > /sys/devices/platform/bone_capemgr/slots
+echo BB-ADC > /sys/devices/platform/bone_capemgr/slots
 
 #GPIO pins
 mkdir /sys/kernel/config/device-tree/overlays/rover_board_rev1
