@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     NetworkManager* netMan = new NetworkManager;
 
     netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
     netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
 #ifdef USING_CAMERA
@@ -233,6 +234,26 @@ int main(int argc, char *argv[])
         }else{
             VLOG(3) << "getData function returned ReceiveType::NODATA";
         }
+
+        //check rApp is still connected. If not, reconnect
+//        std::chrono::duration<double> timeElapsedSinceHeartBeatSent = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - netMan->timeOfLastHeartBeatSent);
+//
+//        if(timeElapsedSinceHeartBeatSent.count() * 1000000 >= 1 ) //if it's been at least one second since the heartbeat was sent
+//        {
+//            netMan->sendHeartBeat();
+//            netMan->timeOfLastHeartBeatSent = std::chrono::high_resolution_clock::now();
+//        }
+//        if (netMan->checkConnectionStatus() == ConnectionStatus::NOT_CONNECTED)//TODO-when it tries to reconnects, reports address already in use
+//        {
+//            std::chrono::duration<double> timeElapsedSinceHeartBeatReceived = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - netMan->timeOfLastHeartBeatReceived);
+//            if (timeElapsedSinceHeartBeatReceived.count() >= 10){
+//                netMan->removeConnections(); //remove existing, dead connections from list
+//                netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+//                netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+//                netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+//
+//            }
+//        }
     }
     return 0;
 }
