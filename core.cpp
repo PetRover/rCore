@@ -57,8 +57,8 @@ int main(int argc, char *argv[])
     NetworkManager* netMan = new NetworkManager;
 
     netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-    netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+//    netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1039, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
 #ifdef USING_CAMERA
     Camera* camera = new Camera(netMan);
