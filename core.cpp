@@ -95,8 +95,9 @@ using namespace RVR;
 // ==============================================================
         NetworkManager *netMan = new NetworkManager;
 
-        netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
-        netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+    netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+//    netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+    netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1039, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
 
 #ifdef USING_CAMERA
         Camera *camera = new Camera(netMan);
@@ -254,44 +255,63 @@ using namespace RVR;
                                 chunk->setLength(500000);
                                 netMan->sendData("CAMERA", chunk);
 #endif
-                                    break;
-                            }
+                                break;
                         }
-                        break;
-                    case DataType::STATUS:
-                        VLOG(2) << "Received a status chunk";
+                    }
+                    break;
+                case DataType::STATUS:
+                    VLOG(2) << "Received a status chunk";
+                    {
+                        Status stat = Status(*nc);
+                        switch (stat.getStatusType())
                         {
-                            Status stat = Status(*nc);
-                            switch (stat.getStatusType())
-                            {
-                                case StatusType::CHARGING:
-                                    VLOG(1) << "Got a charging status";
-                                    stop = true;
-                                    break;
-                                case StatusType::NOT_CHARGING:
-                                    VLOG(1) << "Got a not charging status";
-                                    stop = true;
-                                    break;
-                            }
-                            break;
+                            case StatusType::CHARGING:
+                                VLOG(1) << "Got a charging status";
+                                stop = true;
+                                break;
+                            case StatusType::NOT_CHARGING:
+                                VLOG(1) << "Got a not charging status";
+                                stop = true;
+                                break;
                         }
-                    case DataType::CAMERA:
-                        VLOG(2) << "Received a camera chunk";
-                        // Not yet implemented
                         break;
-                    case DataType::TEXT:
-                        VLOG(2) << "Received a text chunk";
-                        // Code
-                        break;
-                    case DataType::NONE:
-                        VLOG(2) << "Received a chunk of type NONE";
-                        // Not yet implemented
-                        break;
-                }
-            } else
-            {
-                VLOG(3) << "getData function returned ReceiveType::NODATA";
+                    }
+                case DataType::CAMERA:
+                    VLOG(2) << "Received a camera chunk";
+                    // Not yet implemented
+                    break;
+                case DataType::TEXT:
+                    VLOG(2) << "Received a text chunk";
+                    // Code
+                    break;
+                case DataType::NONE:
+                    VLOG(2) << "Received a chunk of type NONE";
+                    // Not yet implemented
+                    break;
             }
+        }else{
+            VLOG(3) << "getData function returned ReceiveType::NODATA";
         }
-        return 0;
+
+        //check rApp is still connected. If not, reconnect
+//        std::chrono::duration<double> timeElapsedSinceHeartBeatSent = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - netMan->timeOfLastHeartBeatSent);
+//
+//        if(timeElapsedSinceHeartBeatSent.count() * 1000000 >= 1 ) //if it's been at least one second since the heartbeat was sent
+//        {
+//            netMan->sendHeartBeat();
+//            netMan->timeOfLastHeartBeatSent = std::chrono::high_resolution_clock::now();
+//        }
+//        if (netMan->checkConnectionStatus() == ConnectionStatus::NOT_CONNECTED)//TODO-when it tries to reconnects, reports address already in use
+//        {
+//            std::chrono::duration<double> timeElapsedSinceHeartBeatReceived = std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now() - netMan->timeOfLastHeartBeatReceived);
+//            if (timeElapsedSinceHeartBeatReceived.count() >= 10){
+//                netMan->removeConnections(); //remove existing, dead connections from list
+//                netMan->initializeNewConnectionAndConnect("COMMANDS", ROVER_IP, APP_IP, 1024, ConnectionInitType::CONNECT, ConnectionProtocol::TCP);
+//                netMan->initializeNewConnectionAndConnect("HEARTBEAT", ROVER_IP, APP_IP, 1026, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+//                netMan->initializeNewConnectionAndConnect("CAMERA", ROVER_IP, APP_IP, 1025, ConnectionInitType::CONNECT, ConnectionProtocol::UDP);
+//
+//            }
+//        }
     }
+    return 0;
+}
